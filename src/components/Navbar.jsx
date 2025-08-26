@@ -6,7 +6,7 @@ const Navbar = () => {
     const isLocation =  useLocation();
 
     const isHomeActive = ()=>{
-        location.pathname ==="/" || location.pathname ==="/home"
+        return location.pathname ==="/" || location.pathname ==="/home"
     }
   return (
     <>
@@ -18,17 +18,27 @@ const Navbar = () => {
         </div>
         <div className=" flex justify-center w-[500px] ">
           <ul className=" flex gap-15 ">
+            <li>
+              <NavLink>
+
+              </NavLink>
+            </li>
             <li className="font-bold ">
               <NavLink
                 to="/home"
-                className={isHomeActive?"text-red-600":"text-black"}
+                className={({isActive})=>{
+                  return isActive  ?"text-red-600":"text-black";
+                }}
               >
                 Home
               
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/movies">
+            <li className="font-bold ">
+              <NavLink to="/movies"
+              className={({isActive})=>{
+                return isActive?"text-red-600":"text-black";
+              }}>
                 Movie
               </NavLink>
             </li>
