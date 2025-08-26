@@ -56,8 +56,8 @@ const Navbar = () => {
         </div>
          {isLoggin ? (
           <>
-            <NavLink>{user}</NavLink>
-            <button>Logout</button>
+            <NavLink> {user}</NavLink>
+            <button onClick={()=>dispatch(logout())} className="transition duration-200  hover:text-red-500 cursor-pointer font-medium" >Logout</button>
           </>
         ) : (
           <>
