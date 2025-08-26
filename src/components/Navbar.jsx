@@ -3,11 +3,11 @@ import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
 const Navbar = () => {
-    const isLocation =  useLocation();
+    // const location =  useLocation();
 
-    const isHomeActive = ()=>{
-        return location.pathname ==="/" || location.pathname ==="/home"
-    }
+    // const isHomeActive = ()=>{
+    //     return location.pathname ==="/" || location.pathname ==="/home"
+    // }
   return (
     <>
       <div className=" bg-blue-50 w-full h-20 flex justify-around items-center">
@@ -18,16 +18,12 @@ const Navbar = () => {
         </div>
         <div className=" flex justify-center w-[500px] ">
           <ul className=" flex gap-15 ">
-            <li>
-              <NavLink>
-
-              </NavLink>
-            </li>
+           
             <li className="font-bold ">
               <NavLink
                 to="/home"
                 className={({isActive})=>{
-                  return isActive  ?"text-red-600":"text-black";
+                 return  isActive || window.location.pathname=== "/"?"text-red-600":"text-black"
                 }}
               >
                 Home
@@ -42,17 +38,27 @@ const Navbar = () => {
                 Movie
               </NavLink>
             </li>
-            <li>
-              <NavLink>Ticket Rate</NavLink>
+            <li className="font-bold ">
+              <NavLink to="/ticket-rate" className={({isActive})=>{
+                return isActive ? "text-red-600":"text-black";
+              }}>Ticket Rate</NavLink>
             </li>
            
           </ul>
         
         </div>
           <div className="flex gap-5 ">
-            <h1>Login</h1>
-            <h1>Register</h1>
+          <NavLink to="/login" className="hover:text-red-500">
+              <h1 className="font-medium transition duration-200">Login</h1>
+          </NavLink>
+            <NavLink to="/register" className="hover:text-red-500">
+              <h1 className="font-medium transition duration-200">Register</h1>
+            </NavLink>
           </div>
+      </div>
+
+      <div>
+        
       </div>
     </>
   );
