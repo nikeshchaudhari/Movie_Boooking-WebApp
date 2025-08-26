@@ -1,13 +1,14 @@
 import { isAction } from "@reduxjs/toolkit";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
+import {logout} from "../feature/auth"
 
 const Navbar = () => {
-    // const location =  useLocation();
-
-    // const isHomeActive = ()=>{
-    //     return location.pathname ==="/" || location.pathname ==="/home"
-    // }
+    const dispatch = useDispatch();
+    const authState = useSelector((state)=>state.auth)
+    const user = authState.user
+    const isLoggin = authState.isLoggin
   return (
     <>
       <div className=" bg-blue-50 w-full h-20 flex justify-around items-center">
@@ -58,6 +59,7 @@ const Navbar = () => {
       </div>
 
       <div>
+        {/* After User Login.... */}
         
       </div>
     </>
