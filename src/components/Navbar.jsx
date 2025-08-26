@@ -1,3 +1,4 @@
+import { isAction } from "@reduxjs/toolkit";
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
@@ -9,31 +10,39 @@ const Navbar = () => {
     }
   return (
     <>
-      <div className=" bg-[#dcd4c3] w-screen h-20 flex justify-between items-center">
+      <div className=" bg-blue-50 w-full h-20 flex justify-around items-center">
         <div className="w-[20vw]">
           <h1 className="text-black text-[30px] ml-3 font-semibold">
             MOVIES CINEMA{" "}
           </h1>
         </div>
-        <div className="bg-white w-[75vw]  h-9 flex justify-between items-center p-4">
-          <ul className=" flex gap-2">
+        <div className=" flex justify-center w-[500px] ">
+          <ul className=" flex gap-15 ">
             <li className="font-bold ">
               <NavLink
                 to="/home"
-                className={isHomeActive ? "bg-orange-500 p-2 text-white":"text-black "}
+                className={isHomeActive?"text-red-600":"text-black"}
               >
-                HOME
+                Home
+              
               </NavLink>
             </li>
-
-            <li className="font-bold">MOVIES</li>
-            <li className="font-bold">TICKET RATE</li>
+            <li>
+              <NavLink to="/movies">
+                Movie
+              </NavLink>
+            </li>
+            <li>
+              <NavLink>Ticket Rate</NavLink>
+            </li>
+           
           </ul>
-          <div>
-            <h1>LOGIN</h1>
-          </div>
+        
         </div>
-        <div></div>
+          <div className="flex gap-5 ">
+            <h1>Login</h1>
+            <h1>Register</h1>
+          </div>
       </div>
     </>
   );
