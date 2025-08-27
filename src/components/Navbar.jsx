@@ -12,9 +12,9 @@ const Navbar = () => {
   return (
     <>
     
-      <div className=" bg-blue-50 w-full h-20 flex justify-around items-center">
+      <div className=" bg-black/20 w-full h-20 flex justify-around items-center">
         <div className="w-[20vw]">
-          <h1 className="text-black text-[30px] ml-3 font-semibold">
+          <h1 className="text-white text-[30px] ml-3 font-semibold">
             MOVIES CINEMA{" "}
           </h1>
         </div>
@@ -25,8 +25,8 @@ const Navbar = () => {
                 to="/home"
                 className={({ isActive }) => {
                   return isActive || window.location.pathname === "/"
-                    ? "text-red-600"
-                    : "text-black";
+                    ? "text-yellow-500"
+                    : "text-white";
                 }}
               >
                 Home
@@ -36,7 +36,7 @@ const Navbar = () => {
               <NavLink
                 to="/movies"
                 className={({ isActive }) => {
-                  return isActive ? "text-red-600" : "text-black";
+                  return isActive ? "text-yellow-500" : "text-white";
                 }}
               >
                 Movie
@@ -46,7 +46,7 @@ const Navbar = () => {
               <NavLink
                 to="/ticket-rate"
                 className={({ isActive }) => {
-                  return isActive ? "text-red-600" : "text-black";
+                  return isActive ? "text-yellow-500" : "text-white";
                 }}
               >
                 Ticket Rate
@@ -57,15 +57,15 @@ const Navbar = () => {
          {isLoggin ? (
           <>
             <NavLink> {user}</NavLink>
-            <button onClick={()=>dispatch(logout())} className="transition duration-200  hover:text-red-500 cursor-pointer font-medium" >Logout</button>
+            <button onClick={()=>dispatch(logout())} className="transition duration-200  hover:text-yellow-500 cursor-pointer font-medium" >Logout</button>
           </>
         ) : (
           <>
             <div className="flex gap-5 ">
-              <NavLink to="/login" className="hover:text-red-500">
+              <NavLink to="/login" className="hover:text-yellow-500  text-white">
                 <h1 className="font-medium transition duration-200">Login</h1>
               </NavLink>
-              <NavLink to="/register" className="hover:text-red-500">
+              <NavLink to="/register" className="hover:text-yellow-500 text-white">
                 <h1 className="font-medium transition duration-200">
                   Register
                 </h1>
