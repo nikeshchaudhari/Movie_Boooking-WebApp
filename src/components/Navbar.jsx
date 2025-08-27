@@ -1,5 +1,5 @@
-import { isAction } from "@reduxjs/toolkit";
-import React from "react";
+
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
 import { logout } from "../feature/auth/authSlice";
@@ -9,6 +9,8 @@ const Navbar = () => {
   const authState = useSelector((state) => state.auth);
   const user = authState.user;
   const isLoggin = authState.isLoggin;
+
+  const [isOpen,setIsOpen]= useState(false)
   return (
     <>
     <div className="relative">
@@ -75,6 +77,12 @@ const Navbar = () => {
             </div>
           </>
         )}
+
+       <button className="text-white md:hidden block">
+        Click
+       </button>
+
+
         
       </div>
       <span className="absolute bottom-0 left-0 h-[1px] w-full bg-white/30" > </span>
