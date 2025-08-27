@@ -11,15 +11,17 @@ const Navbar = () => {
   const isLoggin = authState.isLoggin;
   return (
     <>
-    
-      <div className=" bg-black/20 w-full h-20 flex justify-around items-center">
+    <div className="relative">
+      <div className=" bg-black/20 md:w-full h-20 flex  justify-around items-center ">
         <div className="w-[20vw]">
-          <h1 className="text-white text-[30px] ml-3 font-semibold">
+         <NavLink to="/home">
+           <h1 className="text-white text-[30px] ml-3 font-semibold">
             MOVIES CINEMA{" "}
           </h1>
+         </NavLink>
         </div>
         <div className=" flex justify-center w-[500px] ">
-          <ul className=" flex gap-15 ">
+          <ul className="hidden md:flex gap-15  ">
             <li className="font-bold ">
               <NavLink
                 to="/home"
@@ -73,7 +75,10 @@ const Navbar = () => {
             </div>
           </>
         )}
+        
       </div>
+      <span className="absolute bottom-0 left-0 h-[1px] w-full bg-white/30" > </span>
+    </div>
 
      
     </>
