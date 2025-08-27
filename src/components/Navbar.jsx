@@ -90,12 +90,33 @@ const Navbar = () => {
             </>
           )}
           {/* Hamburger */}
+
           <div className="mr-5 md:hidden" onClick={() => setIsOpen(!isOpen)}>
-            <RxHamburgerMenu className="text-white text-[25px]" />
+            {isOpen ? (
+              <MdClose className="text-white text-[25px]" />
+            ) : (
+              <RxHamburgerMenu className="text-white text-[25px]" />
+            )}
           </div>
         </div>
-       
-        <span className="absolute bottom-0 left-0 h-[1px] w-full bg-white/30 md:block hidden">
+
+        {/* Mobile View */}
+
+        {isOpen && (
+          <div
+            className="bg-black/50 w-full  h-full fixed 
+           right-0  text-white"
+          >
+            <div className="flex flex-col gap-2 ml-8 mt-5 ">
+              <NavLink to="/home" className={({isActive})=>{
+                return isActive ?"text-yellow-500": "text-white"
+              }}>Home</NavLink>
+              <NavLink>Movies</NavLink>
+              <NavLink>Ticket Rates</NavLink>
+            </div>
+          </div>
+        )}
+        <span className="absolute bottom-0 left-0 h-[1px] w-full bg-white/30 md">
           {" "}
         </span>
       </div>
