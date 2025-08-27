@@ -108,8 +108,8 @@ const Navbar = () => {
 
         {isOpen && (
           <div
-            className="bg-black/50 w-full  h-full fixed 
-           right-0  text-white"
+            className="bg-black  w-[95vw]  h-full fixed 
+           right-0  text-white z-1"
           >
             <div className="flex flex-col gap-2 ml-8 mt-5 ">
               <NavLink
@@ -144,7 +144,7 @@ const Navbar = () => {
         </span>
       </div>
       
-      <Slider/>
+     
     </>
   );
 };
