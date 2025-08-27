@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
 import { logout } from "../feature/auth/authSlice";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { MdClose } from "react-icons/md";
+import axios from "axios";
+import Slider from "./Slider";
 
 const Navbar = () => {
+
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
   const user = authState.user;
   const isLoggin = authState.isLoggin;
-
   const [isOpen, setIsOpen] = useState(false);
+
+
   return (
     <>
       <div className="relative">
@@ -108,11 +112,30 @@ const Navbar = () => {
            right-0  text-white"
           >
             <div className="flex flex-col gap-2 ml-8 mt-5 ">
-              <NavLink to="/home" className={({isActive})=>{
-                return isActive ?"text-yellow-500": "text-white"
-              }}>Home</NavLink>
-              <NavLink>Movies</NavLink>
-              <NavLink>Ticket Rates</NavLink>
+              <NavLink
+                to="/home"
+                className={({ isActive }) => {
+                  return isActive ? "text-yellow-500" : "text-white";
+                }}
+              >
+                Home
+              </NavLink>
+              <NavLink
+                to="/movies"
+                className={({ isActive }) => {
+                  return isActive ? "text-yellow-500" : "text-white";
+                }}
+              >
+                Movies
+              </NavLink>
+              <NavLink
+                to="/ticket-rate"
+                className={({ isActive }) => {
+                  return isActive ? "text-yellow-500" : "text-white";
+                }}
+              >
+                Ticket Rates
+              </NavLink>
             </div>
           </div>
         )}
@@ -120,6 +143,8 @@ const Navbar = () => {
           {" "}
         </span>
       </div>
+      
+      <Slider/>
     </>
   );
 };
