@@ -13,9 +13,9 @@ const Navbar = () => {
     <>
     <div className="relative">
       <div className=" bg-black/20 md:w-full h-20 flex  justify-around items-center ">
-        <div className="w-[20vw]">
+        <div className="w-[80vw] md:w-[20vw] mx-5 md:mx-0">
          <NavLink to="/home">
-           <h1 className="text-white text-[30px] ml-3 font-semibold">
+           <h1 className="text-white  text-[20px] lg:text-[30px] mx-2 lg:ml-3 md:font-semibold  md:w-[300px]">
             MOVIES CINEMA{" "}
           </h1>
          </NavLink>
@@ -63,7 +63,7 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <div className="flex gap-5 ">
+            <div className="flex md:gap-5 gap-3 mx-5">
               <NavLink to="/login" className="hover:text-yellow-500  text-white">
                 <h1 className="font-medium transition duration-200">Login</h1>
               </NavLink>
