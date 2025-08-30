@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import Navbar from "../components/Navbar";
 import React from "react";
+import{login} from '../feature/auth'
 
 const Register = () => {
   return (
