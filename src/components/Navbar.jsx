@@ -14,7 +14,7 @@ const Navbar = () => {
   const user = authState.user;
   const isLoggin = authState.isLoggin;
   const [isOpen, setIsOpen] = useState(false);
-
+  
 
   return (
     <>
@@ -65,10 +65,10 @@ const Navbar = () => {
           </div>
           {isLoggin ? (
             <>
-              <NavLink> {user}</NavLink>
+              <span className="text-white">{user.email}</span>
               <button
                 onClick={() => dispatch(logout())}
-                className="transition duration-200  hover:text-yellow-500 cursor-pointer font-medium"
+                className="transition duration-200  hover:text-yellow-500 cursor-pointer font-medium text-white"
               >
                 Logout
               </button>
