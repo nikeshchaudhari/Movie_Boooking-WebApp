@@ -6,7 +6,7 @@ const initialState = storeAuth ? JSON.parse(storeAuth):{
     token:null
 }
 
-const authSlice=createSlice(
+const authSlice = createSlice(
     {
     name:"auth",
     initialState,
