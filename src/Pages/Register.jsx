@@ -1,9 +1,20 @@
 import { useFormik } from "formik";
 import Navbar from "../components/Navbar";
-import React from "react";
-import{login} from '../feature/auth'
+import React, { useState } from "react";
+// import{login} from '../feature/auth'
 
 const Register = () => {
+  const[firstName,setFirstName]=useState("");
+  const[lastName,setLastName]= useState("");
+  const[phone,setPhone]= useState("");
+  const[email,setEmail]= useState("");
+  const[password,setPassword]= useState("");
+  const[conpassword,setConPassword]= useState("");
+
+  const handleRegister =(e)=>{
+    e.preventDefaullt();
+
+  }
   return (
     <>
       <Navbar />
@@ -12,7 +23,7 @@ const Register = () => {
           <h1 className="text-white text-[30px] text-center mt-3 font-bold">
             Register{" "}
           </h1>
-          <form className=" flex flex-col p-6 items-start ">
+          <form onSubmit={handleRegister} className=" flex flex-col p-6 items-start ">
             <label
               htmlFor="firstname"
               className="text-white mb-2 font-semibold "
