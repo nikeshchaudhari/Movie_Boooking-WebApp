@@ -4,17 +4,18 @@ import React, { useState } from "react";
 // import{login} from '../feature/auth'
 
 const Register = () => {
-  const[firstName,setFirstName]=useState("");
-  const[lastName,setLastName]= useState("");
-  const[phone,setPhone]= useState("");
-  const[email,setEmail]= useState("");
-  const[password,setPassword]= useState("");
-  const[conpassword,setConPassword]= useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [conpassword, setConPassword] = useState("");
 
-  const handleRegister =(e)=>{
-    e.preventDefaullt();
+  const handleRegister = (e) => {
+    e.preventDefault();
 
-  }
+    console.log("Register ");
+  };
   return (
     <>
       <Navbar />
@@ -23,7 +24,10 @@ const Register = () => {
           <h1 className="text-white text-[30px] text-center mt-3 font-bold">
             Register{" "}
           </h1>
-          <form onSubmit={handleRegister} className=" flex flex-col p-6 items-start ">
+          <form
+            onSubmit={handleRegister}
+            className=" flex flex-col p-6 items-start "
+          >
             <label
               htmlFor="firstname"
               className="text-white mb-2 font-semibold "
@@ -34,6 +38,8 @@ const Register = () => {
               type="text"
               placeholder="e.g.Jhon"
               className="border  w-[400px]  h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
             />
             <label
               htmlFor="lastname"
@@ -45,6 +51,8 @@ const Register = () => {
               type="text"
               placeholder="e.g doe"
               className="border  w-[400px]  h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
+              value={lastName}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <label htmlFor="phone" className="text-white mb-2 font-semibold ">
               Phone
@@ -53,6 +61,8 @@ const Register = () => {
               type="text"
               placeholder="e.g.9xxxxxxx"
               className="border  w-[400px]  h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             />
             <label htmlFor="email" className="text-white mb-2 font-semibold ">
               Email Address
@@ -61,22 +71,34 @@ const Register = () => {
               type="email"
               placeholder="e.g example@gmail.com"
               className="border  w-[400px]  h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            <label htmlFor="password" className="text-white mb-2 font-semibold ">
+            <label
+              htmlFor="password"
+              className="text-white mb-2 font-semibold "
+            >
               Password
             </label>
             <input
               type="password"
               placeholder="***********"
               className="border  w-[400px]  h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
-            <label htmlFor="con-password" className="text-white mb-2 font-semibold ">
+            <label
+              htmlFor="con-password"
+              className="text-white mb-2 font-semibold "
+            >
               Confirm password
             </label>
             <input
               type="password"
               placeholder="***********"
               className="border  w-[400px]  h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
+              value={conpassword}
+              onChange={(e) => setConPassword(e.target.value)}
             />
 
             <button
@@ -86,10 +108,8 @@ const Register = () => {
               Login
             </button>
             <p className="text-center w-full text-white">
-             I have an account? {" "}
-              <span className="text-[#00E5FF]">Login</span>
+              I have an account? <span className="text-[#00E5FF]">Login</span>
             </p>
-           
           </form>
         </div>
       </div>
