@@ -55,13 +55,13 @@ const Register = () => {
     <>
       <Navbar />
       <div className="mt-15">
-        <div className="w-[450px] md:min-h-screen mx-auto border border-white rounded-xl">
+        <div className="w-full m-4 md:w-[450px] h-[70vh] mb-5 md:h-full mx-auto border border-white rounded-xl">
           <h1 className="text-white text-[30px] text-center mt-3 font-bold">
             Register{" "}
           </h1>
           <form
             onSubmit={handleRegister}
-            className=" flex flex-col p-6 items-start "
+            className=" flex flex-col p-6 items-start"
           >
             <label
               htmlFor="firstname"
@@ -72,7 +72,7 @@ const Register = () => {
             <input
               type="text"
               placeholder="e.g.Jhon"
-              className="border  w-[400px]  h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
+              className="border w-full  md:w-[400px]  h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
@@ -85,7 +85,7 @@ const Register = () => {
             <input
               type="text"
               placeholder="e.g doe"
-              className="border  w-[400px]  h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
+              className="border w-full   md:w-[400px]   h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
@@ -95,7 +95,7 @@ const Register = () => {
             <input
               type="text"
               placeholder="e.g.9xxxxxxx"
-              className="border  w-[400px]  h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
+              className="border w-full   md:w-[400px]   h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />
@@ -105,7 +105,7 @@ const Register = () => {
             <input
               type="email"
               placeholder="e.g example@gmail.com"
-              className="border  w-[400px]  h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
+              className="border w-full   md:w-[400px]  h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -118,7 +118,7 @@ const Register = () => {
             <input
               type="password"
               placeholder="***********"
-              className="border  w-[400px]  h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
+              className="border  w-full   md:w-[400px]   h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -131,14 +131,14 @@ const Register = () => {
             <input
               type="password"
               placeholder="***********"
-              className="border  w-[400px]  h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
+              className="border  w-full   md:w-[400px]  h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
               value={conpassword}
               onChange={(e) => setConPassword(e.target.value)}
             />
 
             <button
               type="submit"
-              className=" bg-red-600 w-[400px] h-10 rounded-4xl text-white font-bold cursor-pointer hover:bg-red-900 transition hover:duration-500 mb-4"
+              className=" bg-red-600 w-full  md:w-[400px]  h-10 rounded-4xl text-white font-bold cursor-pointer hover:bg-red-900 transition hover:duration-500 mb-4"
             >
               Login
             </button>
