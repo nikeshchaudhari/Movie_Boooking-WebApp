@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import { login, logout } from "../feature/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -10,23 +11,46 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (email === "test@gmail.com" && password === "12345") {
-      dispatch(
-        login({
-          user: { email: email },
-          token: "dummy1234",
-        })
+    try {
+      const res = await axios.get(
+        `http://localhost:3000/users?email=${email}&password=${password}`
       );
-      navigate('/');
-      setEmail("");
-      setPassword("");
-      console.log("Login sucessfull");
-    } else {
-      console.log("NOt valid");
+
+      if (res.data.length > 0) {
+        dispatch(
+          login({
+            user: { email: res.data[0].email },
+            token: "data.token",
+          })
+        );
+
+        setEmail("");
+        setPassword("");
+        navigate("/");
+      } else {
+        console.log("Invalid email or password");
+      }
+    } catch (err) {
+      console.log("Invalid email or password");
     }
+
+  //     if (email === "test@gmail.com" && password === "12345") {
+  //       dispatch(
+  //         login({
+  //           user: { email: email },
+  //           token: "dummy1234",
+  //         })
+  //       );
+  //       navigate('/');
+  //       setEmail("");
+  //       setPassword("");
+  //       console.log("Login sucessfull");
+  //     } else {
+  //       console.log("NOt valid");
+  //     }
   };
 
   return (
@@ -47,7 +71,7 @@ const Login = () => {
             <input
               type="text"
               placeholder="e.g.example@gmail.com "
-              className="border  w-[400px]  h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
+              className="border w-full   md:w-[400px]  h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -60,7 +84,7 @@ const Login = () => {
             <input
               type="password"
               placeholder="*********** "
-              className="border  w-[400px]  h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
+              className="border w-full   md:w-[400px] h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
