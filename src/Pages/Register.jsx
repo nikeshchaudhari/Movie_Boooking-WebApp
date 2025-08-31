@@ -1,6 +1,8 @@
 import { useFormik } from "formik";
 import Navbar from "../components/Navbar";
 import React, { useState } from "react";
+// import { useDispatch } from "react-redux";
+import axios from "axios";
 // import{login} from '../feature/auth'
 
 const Register = () => {
@@ -11,10 +13,43 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [conpassword, setConPassword] = useState("");
 
-  const handleRegister = (e) => {
+  // const dispatch = useDispatch();
+
+  const handleRegister = async (e) => {
     e.preventDefault();
 
-    console.log("Register ");
+    if (password !== conpassword) {
+      return console.log("Password Doesnot Match");
+    }
+    const formData = new FormData();
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("password", password);
+    formData.append("conpassword", conpassword);
+    const data = {
+      firstName,
+      lastName,
+      email,
+      phone,
+      password,
+      conpassword,
+    };
+
+    try {
+      const res = await axios.post("http://localhost:3000/users", data);
+       console.log("User registered", res.data);
+
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPhone("");
+      setPassword("");
+      setConPassword("");
+    } catch (err) {
+      console.log("Error Register");
+    }
   };
   return (
     <>
@@ -52,7 +87,7 @@ const Register = () => {
               placeholder="e.g doe"
               className="border  w-[400px]  h-10  bg-white rounded-lg p-4 focus:border-red-500 focus:outline-none mb-6"
               value={lastName}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setLastName(e.target.value)}
             />
             <label htmlFor="phone" className="text-white mb-2 font-semibold ">
               Phone
