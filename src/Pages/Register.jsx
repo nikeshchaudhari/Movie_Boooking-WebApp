@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import React, { useState } from "react";
 // import { useDispatch } from "react-redux";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 // import{login} from '../feature/auth'
 
 const Register = () => {
@@ -12,7 +13,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [conpassword, setConPassword] = useState("");
-
+const navigate = useNavigate();
   // const dispatch = useDispatch();
 
   const handleRegister = async (e) => {
@@ -47,6 +48,10 @@ const Register = () => {
       setPhone("");
       setPassword("");
       setConPassword("");
+
+      navigate("/login")
+
+
     } catch (err) {
       console.log("Error Register");
     }
@@ -55,7 +60,7 @@ const Register = () => {
     <>
       <Navbar />
       <div className="mt-15">
-        <div className="w-full m-4 md:w-[450px] h-[70vh] mb-5 md:h-full mx-auto border border-white rounded-xl">
+        <div className="w-full  md:w-[450px] h-[70vh] mb-5 md:h-full mx-auto border border-white rounded-xl">
           <h1 className="text-white text-[30px] text-center mt-3 font-bold">
             Register{" "}
           </h1>
