@@ -20,7 +20,7 @@ const Register = () => {
     <>
       <Navbar />
       <div className="mt-15">
-        <div className="w-[450px] min-h-screen mx-auto border border-white rounded-xl">
+        <div className="w-[450px] md:min-h-screen mx-auto border border-white rounded-xl">
           <h1 className="text-white text-[30px] text-center mt-3 font-bold">
             Register{" "}
           </h1>
