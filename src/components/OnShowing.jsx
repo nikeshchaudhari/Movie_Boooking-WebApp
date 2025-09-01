@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setMovies, setSelectDate } from "../feature/movie/movieSlice";
-import axios from "axios";
 
 const Onshowing = () => {
-  const dispatch = useDispatch();
-  const [date, setDates] = useState([]);
-  const [selectedDate, setSelectedDate] = useState("");
-
-  const movies = useSelector((state) => state.movies.filterMovies);
+  const [date, setDate] = useState([]);
+  const [selected, setSelected] = useState("");
 
   useEffect(() => {
     const today = new Date();
+    // console.log(today);
     const numDays = 7;
-    const tempDates = [];
+    const dDate = [];
+
+    console.log(dDate);
 
     for (let i = 0; i < numDays; i++) {
       const d = new Date();
@@ -25,63 +22,33 @@ const Onshowing = () => {
       } else if (i === 1) {
         day = "Tomorrow";
       } else {
-        day = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+       day=  d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
       }
+      dDate.push({ day, value: d.toISOString().split("T")[0] });
 
-      tempDates.push({ day, value: d.toISOString().split("T")[0] });
+      console.log(day);
     }
-    setDates(tempDates);
-    setSelectedDate(tempDates[0].value);
-    const fetchData = async () => {
-      try {
-        const res = await axios.get("http://localhost:3000/movies");
-        dispatch(setMovies(res.data));
-        dispatch(setSelectDate(tempDates[0].value));
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
-
-    // dispatch(setSelectDate(tempDates[0].value));
-  }, [dispatch]);
+    setDate(dDate);
+    setSelected(dDate[0].value);
+  }, []);
 
   return (
     <>
-      <h1 className="text-white text-center font-semibold text-[30px] mt-5">
+      <h1 className="text-white text-center mt-3 text-[25px] font-bold">
         Now Showing
       </h1>
-      <div className="flex justify-center mt-5">
-        {date.map((d) => (
-          <button
-            key={d.value}
-            className={`p-5  py-2 mx-2  ${
-              selectedDate === d.value
-                ? "bg-red-800 text-white rounded-lg cursor-pointer"
-                : " border border-white rounded-lg text-white cursor-pointer"
-            }`}
-            onClick={() => {
-              setSelectedDate(d.value);
-              dispatch(setSelectDate(d.value));
-            }}
-          >
+      <div className="mx-2 flex justify-center gap-3 mt-5 ">
+        {date.map((d)=>(
+          <button key={d.value} className={`bg-red py-1.5 px-6 mb-20 cursor-pointer ${
+          selected === d.value ? "bg-red-800 text-white rounded-lg"
+                : "border border-white text-white rounded-lg" }`}
+              onClick={()=>setSelected(d.value)}
+                >
             {d.day}
+            
           </button>
         ))}
       </div>
-
-      {/* Movies List */}
-      {movies.length > 0 ? (
-        movies.map((m) => (
-          <p key={m.id} className="bg-gray-800 p-2 my-2 rounded text-white">
-            {m.title}
-          </p>
-        ))
-      ) : (
-        <p className="text-white">No movies today</p>
-      )}
-
-      <div></div>
     </>
   );
 };
