@@ -30,21 +30,20 @@ const Onshowing = () => {
 
       tempDates.push({ day, value: d.toISOString().split("T")[0] });
     }
-
+    setDates(tempDates);
+    setSelectedDate(tempDates[0].value);
     const fetchData = async () => {
       try {
         const res = await axios.get("http://localhost:3000/movies");
         dispatch(setMovies(res.data));
-        dispatch(selectedDate(tempDates[0].value));
+        dispatch(setSelectDate(tempDates[0].value));
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
 
-    setDates(tempDates);
-    setSelectedDate(tempDates[0].value);
-    dispatch(setSelectDate(tempDates[0].value));
+    // dispatch(setSelectDate(tempDates[0].value));
   }, [dispatch]);
 
   return (
@@ -62,8 +61,8 @@ const Onshowing = () => {
                 : " border border-white rounded-lg text-white cursor-pointer"
             }`}
             onClick={() => {
-              setSelectDate(d.value);
-              dispatch(setSelectedDate(d.value));
+              setSelectedDate(d.value);
+              dispatch(setSelectDate(d.value));
             }}
           >
             {d.day}
@@ -72,17 +71,17 @@ const Onshowing = () => {
       </div>
 
       {/* Movies List */}
-      {movies.length >0 ?(
-        movies.map((m)=>(
-          <p key={m.id} className="bg-gray-800 p-2 my-2 rounded">{m.title}</p>
+      {movies.length > 0 ? (
+        movies.map((m) => (
+          <p key={m.id} className="bg-gray-800 p-2 my-2 rounded text-white">
+            {m.title}
+          </p>
         ))
-      ):(
-           <p>No movies today</p>
+      ) : (
+        <p className="text-white">No movies today</p>
       )}
 
-      <div>
-
-      </div>
+      <div></div>
     </>
   );
 };
