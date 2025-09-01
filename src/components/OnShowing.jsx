@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setMovies, setSelectDate } from "../feature/movie/movieSlice";
+import axios from "axios";
 
 const Onshowing = () => {
   const dispatch = useDispatch();
   const [date, setDates] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(""); 
+  const [selectedDate, setSelectedDate] = useState("");
 
-  const movies = useSelector((state)=>state.movies.filterMovies);
+  const movies = useSelector((state) => state.movies.filterMovies);
 
   useEffect(() => {
     const today = new Date();
@@ -30,25 +31,59 @@ const Onshowing = () => {
       tempDates.push({ day, value: d.toISOString().split("T")[0] });
     }
 
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("http://localhost:3000/movies");
+        dispatch(setMovies(res.data));
+        dispatch(selectedDate(tempDates[0].value));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+
     setDates(tempDates);
-    setSelectedDate(tempDates[0].value);       
-    dispatch(setSelectDate(tempDates[0].value)); 
+    setSelectedDate(tempDates[0].value);
+    dispatch(setSelectDate(tempDates[0].value));
   }, [dispatch]);
 
   return (
     <>
-      <h1 className="text-white text-center font-semibold text-[30px] mt-5">Now Showing</h1>
+      <h1 className="text-white text-center font-semibold text-[30px] mt-5">
+        Now Showing
+      </h1>
       <div className="flex justify-center mt-5">
-        {date.map((d)=>(
-          <button key={d.value} className={`p-5  py-2 mx-2  ${selectedDate===d.value ? "bg-red-800 text-white rounded-lg cursor-pointer": " border border-white rounded-lg text-white cursor-pointer"}`} onClick={()=>{
-            setSelectDate(d.value);
-            dispatch(setSelectedDate(d.value))
-          }}>
+        {date.map((d) => (
+          <button
+            key={d.value}
+            className={`p-5  py-2 mx-2  ${
+              selectedDate === d.value
+                ? "bg-red-800 text-white rounded-lg cursor-pointer"
+                : " border border-white rounded-lg text-white cursor-pointer"
+            }`}
+            onClick={() => {
+              setSelectDate(d.value);
+              dispatch(setSelectedDate(d.value));
+            }}
+          >
             {d.day}
           </button>
         ))}
       </div>
-      </>
+
+      {/* Movies List */}
+      {movies.length >0 ?(
+        movies.map((m)=>(
+          <p key={m.id} className="bg-gray-800 p-2 my-2 rounded">{m.title}</p>
+        ))
+      ):(
+           <p>No movies today</p>
+      )}
+
+      <div>
+
+      </div>
+    </>
   );
 };
 
