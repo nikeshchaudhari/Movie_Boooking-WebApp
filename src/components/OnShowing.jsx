@@ -16,7 +16,7 @@ const Onshowing = () => {
     const numDays = 7;
     const dDate = [];
 
-    console.log(dDate);
+    // console.log(dDate);
 
     for (let i = 0; i < numDays; i++) {
       const d = new Date();
@@ -32,7 +32,7 @@ const Onshowing = () => {
       }
       dDate.push({ day, value: d.toISOString().split("T")[0] });
 
-      console.log(day);
+      // console.log(day);
     }
     setDate(dDate);
     // setSelected(dDate[0].value);
@@ -42,7 +42,7 @@ const Onshowing = () => {
         dispatch(setMovies(res.data));
         dispatch(setSelectDate(dDate[0].value));
         setSelected(dDate[0].value);
-        console.log(res.data);
+        // console.log(res.data);
       } catch (err) {
         console.error(err);
       }
@@ -52,7 +52,7 @@ const Onshowing = () => {
 
   return (
     <>
-      <h1 className="text-white text-center  text-[25px] font-bold">
+      <h1 className="text-black text-center bg-white text-[25px] font-bold">
         Now Showing
       </h1>
       <div className="w-full p-2">
@@ -63,7 +63,7 @@ const Onshowing = () => {
               className={`bg-red px-4 md:py-1.5 md:px-6 mb-3 cursor-pointer ${
                 selected === d.value
                   ? "bg-red-800 text-white rounded-lg"
-                  : "border border-white text-white rounded-lg"
+                  : "border border-black text-black rounded-lg"
               }`}
               onClick={() => {
                 dispatch(setSelectDate(d.value));
