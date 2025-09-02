@@ -28,7 +28,7 @@ const MovieCard = ({ movies }) => {
                 <img
                   src={movies.poster}
                   alt={movies.title}
-                  className=" h-[250px] md:h-[480px] rounded-br-4xl rounded-tl-4xl transition duration-300 ease-in-out group-hover:brightness-50 cursor-pointer *:"
+                  className=" h-[250px] md:h-[480px] rounded-br-4xl rounded-tl-4xl transform transition group-hover:brightness-50  duration-500 cursor-pointer "
                 />
                 <span className="absolute  top-3 right-3 w-10 h-10 rounded-full bg-red-700 text-white flex items-center justify-center font-bold">
                   {movies.grade}
