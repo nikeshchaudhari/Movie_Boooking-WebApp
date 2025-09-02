@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-
+import { AiOutlinePlayCircle } from 'react-icons/ai';
 const MovieCard = ({ movies }) => {
   const cardRef = useRef();
   const [visible, setVisible] = useState(false);
@@ -33,7 +33,8 @@ const MovieCard = ({ movies }) => {
                 <span className="absolute  top-3 right-3 w-10 h-10 rounded-full bg-red-700 text-white flex items-center justify-center font-bold">
                   {movies.grade}
                 </span>
-                <div className="absolute inset-0 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 cursor-pointer">
+                <div className="absolute inset-0 text-white flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 cursor-pointer">
+                 <AiOutlinePlayCircle className="text-[60px] mb-2 transform transition-transform duration-300 hover:scale-125  "/>
               <span className="font-semibold text-[20px] hover:text-red-300">BUY NOW</span>
             </div>
               </div>
