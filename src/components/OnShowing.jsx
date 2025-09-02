@@ -56,13 +56,13 @@ const Onshowing = () => {
 
   return (
     <>
-      <h1 className="text-white text-center mt-3 text-[25px] font-bold">
+      <h1 className="text-white text-center  text-[25px] font-bold">
         Now Showing
       </h1>
       <div className="w-full p-2">
         <div className= "  md:mx-2 flex justify-center  gap-3 mt-5 flex-wrap ">
         {date.map((d)=>(
-          <button key={d.value} className={`bg-red px-4 md:py-1.5 md:px-6 md:mb-20 cursor-pointer ${
+          <button key={d.value} className={`bg-red px-4 md:py-1.5 md:px-6 mb-3 cursor-pointer ${
           selected === d.value ? "bg-red-800 text-white rounded-lg"
                 : "border border-white text-white rounded-lg" }`}
               onClick={()=>{dispatch(setSelectDate(d.value))
@@ -78,11 +78,11 @@ const Onshowing = () => {
       </div>
       {/* Movie list */}
 
-      <div>
+      <div className="w-full grid grid-cols-2 md:grid-cols-3  lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-items-center bg-white py-2">
         {movies.length>0 ?(
           movies.map((m)=>(
            <div>
-            <MovieCard movies={m} key={m.id}/>
+            <MovieCard movies={m} key={m.id} />
            </div>
           ))
         ):(
