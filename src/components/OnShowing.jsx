@@ -80,8 +80,8 @@ const Onshowing = () => {
       <div className="w-full grid grid-cols-2 md:grid-cols-3  lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-items-center bg-white py-2">
         {movies.length > 0 ? (
           movies.map((m) => (
-            <div>
-              <MovieCard movies={m} key={m.id} />
+            <div key={m.id}>
+              <MovieCard movies={m}  />
             </div>
           ))
         ) : (
