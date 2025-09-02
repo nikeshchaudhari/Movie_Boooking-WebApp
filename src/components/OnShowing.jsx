@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setMovies,setSelectMovie } from "../feature/movie/movieSlice";
+import { setMovies,setSelectDate } from "../feature/movie/movieSlice";
 import axios from "axios";
 import MovieCard from "./MovieCard";
 
@@ -40,7 +40,8 @@ const Onshowing = () => {
       try{
         const res = await axios.get("http://localhost:3000/movies");
         dispatch(setMovies(res.data))
-        dispatch(setSelectMovie(dDate[0].value))
+        dispatch(setSelectDate(dDate[0].value))
+        setSelected(dDate[0].value)
         console.log(res.data);
         
 
@@ -64,7 +65,10 @@ const Onshowing = () => {
           <button key={d.value} className={`bg-red px-4 md:py-1.5 md:px-6 md:mb-20 cursor-pointer ${
           selected === d.value ? "bg-red-800 text-white rounded-lg"
                 : "border border-white text-white rounded-lg" }`}
-              onClick={()=>dispatch(setSelected(d.value))}
+              onClick={()=>{dispatch(setSelectDate(d.value))
+                setSelected(d.value)
+              }}
+              
                 >
             {d.day}
             
@@ -83,7 +87,7 @@ const Onshowing = () => {
           ))
         ):(
 
-          <p className="text-white">NO Movies Available</p>
+          <p className="text-white">No Movies Available</p>
         )}
       </div>
     </>
