@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setMovies,setSelectMovie } from "../feature/movie/movieSlice";
+import axios from "axios";
+import MovieCard from "./MovieCard";
 
 const Onshowing = () => {
+  const dispatch = useDispatch()
   const [date, setDate] = useState([]);
   const [selected, setSelected] = useState("");
+  const movies = useSelector((state)=>state.movies.filterMovies);
 
   useEffect(() => {
     const today = new Date();
@@ -29,25 +35,56 @@ const Onshowing = () => {
       console.log(day);
     }
     setDate(dDate);
-    setSelected(dDate[0].value);
-  }, []);
+    // setSelected(dDate[0].value);
+    const fetchMovies = async()=>{
+      try{
+        const res = await axios.get("http://localhost:3000/movies");
+        dispatch(setMovies(res.data))
+        dispatch(setSelectMovie(dDate[0].value))
+        console.log(res.data);
+        
+
+      }
+      catch(err){
+           console.error(err);
+
+      }
+    };
+    fetchMovies()
+  }, [dispatch]);
 
   return (
     <>
       <h1 className="text-white text-center mt-3 text-[25px] font-bold">
         Now Showing
       </h1>
-      <div className="mx-2 flex justify-center gap-3 mt-5 ">
+      <div className="w-full p-2">
+        <div className= "  md:mx-2 flex justify-center  gap-3 mt-5 flex-wrap ">
         {date.map((d)=>(
-          <button key={d.value} className={`bg-red py-1.5 px-6 mb-20 cursor-pointer ${
+          <button key={d.value} className={`bg-red px-4 md:py-1.5 md:px-6 md:mb-20 cursor-pointer ${
           selected === d.value ? "bg-red-800 text-white rounded-lg"
                 : "border border-white text-white rounded-lg" }`}
-              onClick={()=>setSelected(d.value)}
+              onClick={()=>dispatch(setSelected(d.value))}
                 >
             {d.day}
             
           </button>
         ))}
+      </div>
+      </div>
+      {/* Movie list */}
+
+      <div>
+        {movies.length>0 ?(
+          movies.map((m)=>(
+           <div>
+            <MovieCard movies={m} key={m.id}/>
+           </div>
+          ))
+        ):(
+
+          <p className="text-white">NO Movies Available</p>
+        )}
       </div>
     </>
   );
