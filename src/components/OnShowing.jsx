@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setMovies, setSelectDate } from "../feature/movie/movieSlice";
+import { setMovies, setSelectDate,setSelectMovie } from "../feature/movie/movieSlice";
 import axios from "axios";
 import MovieCard from "./MovieCard";
 
@@ -50,6 +50,10 @@ const Onshowing = () => {
     fetchMovies();
   }, [dispatch]);
 
+  const handleSelectMovie =(mov)=>{
+    dispatch(setSelectMovie(mov));
+  }
+
   return (
     <>
       <h1 className="text-black text-center bg-white text-[25px] font-bold">
@@ -80,7 +84,7 @@ const Onshowing = () => {
       <div className="w-full grid grid-cols-2 md:grid-cols-3  lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-items-center bg-white py-2">
         {movies.length > 0 ? (
           movies.map((m) => (
-            <div key={m.id}>
+            <div key={m.id} onClick={()=>handleSelectMovie(m)}>
               <MovieCard movies={m}  />
             </div>
           ))
