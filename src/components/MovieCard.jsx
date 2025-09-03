@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AiOutlinePlayCircle } from 'react-icons/ai';
+import { Link } from "react-router-dom";
 const MovieCard = ({ movies }) => {
   const cardRef = useRef();
   const [visible, setVisible] = useState(false);
@@ -35,7 +36,9 @@ const MovieCard = ({ movies }) => {
                 </span>
                 <div className="absolute inset-0 text-white flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 cursor-pointer">
                  <AiOutlinePlayCircle className="text-[60px] mb-2 transform transition-transform duration-300 hover:scale-125  "/>
+              <Link to={`/moviedetails/${movies.id}`}>
               <span className="font-semibold text-[20px] hover:text-red-300">BUY NOW</span>
+              </Link>
             </div>
               </div>
             </div>
