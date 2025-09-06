@@ -30,8 +30,8 @@ const Navbar = () => {
         
           {isLoggin ? (
             <>
-              <div className=" flex justify-center w-[500px] ">
-            <ul className="hidden md:flex gap-15  ">
+              <div className=" flex justify-center md:w-full">
+            <ul className="hidden md:flex gap-10  ">
               <li className="font-bold ">
                 <NavLink
                   to="/home"
@@ -66,7 +66,7 @@ const Navbar = () => {
               </li>
               <li className="font-bold ">
                 <NavLink
-                  to="/"
+                  to="/my-ticket"
                   className={({ isActive }) => {
                     return isActive ? "text-yellow-500" : "text-black";
                   }}
@@ -74,12 +74,22 @@ const Navbar = () => {
                   My Tickets
                 </NavLink>
               </li>
+                <li className="font-bold ">
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) => {
+                    return isActive ? "text-yellow-500" : "text-black";
+                  }}
+                >
+                  Contact
+                </NavLink>
+              </li>
             </ul>
           </div>
-              <span className="text-black ">{user.email}</span>
+              <span className="text-black mr-3 md:mr-5 ">{user.email}</span>
               <button
                 onClick={() => dispatch(logout())}
-                className="transition duration-200  hover:text-yellow-500 cursor-pointer font-medium text-black"
+                className="transition duration-200  hover:text-yellow-500 cursor-pointer font-medium text-black mr-2"
               >
                 Logout
               </button>
