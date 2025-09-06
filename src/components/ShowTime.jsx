@@ -1,18 +1,76 @@
 import React from "react";
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const ShowTime = () => {
   return (
     <>
-    <section className="bg-[##fff]/50 mt-5">
+      <section className="bg-[##fff]/50 mt-10">
         <div>
-          <ul>
-            <li><span className="bg-amber-500 w-5 h-5"></span>Available</li>
-            <li><span></span>Booked</li>
-            <li><span></span>Sold Out</li>
-            <li><span></span>Not Available</li>
-          </ul>
+          <div className="flex justify-center items-center">
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="#00b5a1"
+                className="size-10"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M4.5 7.5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3v-9Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </span>
+            <h2 className="mr-5">Available</h2>
+             <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="#f49836"
+                className="size-10"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M4.5 7.5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3v-9Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </span>
+            <h2 className="mr-5">Booked</h2>
+             <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="#e71515"
+                className="size-10"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M4.5 7.5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3v-9Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </span>
+            <h2 className="mr-5">Sold Out</h2>
+             <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="#F8F8F8"
+                className="size-10"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M4.5 7.5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3v-9Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </span>
+            <h2 className="mr-5">Not Available</h2>
+          </div>
         </div>
-    </section>
+      </section>
     </>
   );
 };
