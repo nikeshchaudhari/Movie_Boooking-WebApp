@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import ShowTime from "../components/ShowTime";
 const MovieDetail = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState("");
@@ -89,7 +90,9 @@ const MovieDetail = () => {
           
         </>
       )}
+      <ShowTime/>
     </>
+    
   );
 };
 
