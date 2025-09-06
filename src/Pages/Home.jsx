@@ -1,14 +1,15 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-import Slider from '../components/Slider'
 import OnShowing from '../components/Onshowing'
+import MovieSlider from '../components/MovieSlider'
 
 const Home = () => {
   return (
     <>
     
       <Navbar/>
-       <Slider/>
+      <MovieSlider/>
+  
        <OnShowing/> 
   
     
