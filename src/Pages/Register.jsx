@@ -60,8 +60,8 @@ const navigate = useNavigate();
     <>
       <Navbar />
       <div className="mt-15">
-        <div className="w-full  md:w-[450px] h-[70vh] mb-5 md:h-full mx-auto border border-white rounded-xl">
-          <h1 className="text-white text-[30px] text-center mt-3 font-bold">
+        <div className="w-full  md:w-[450px] h-[70vh] mb-5 md:h-full mx-auto border border-black rounded-xl">
+          <h1 className="text-black text-[30px] text-center mt-3 font-bold">
             Register{" "}
           </h1>
           <form
@@ -70,7 +70,7 @@ const navigate = useNavigate();
           >
             <label
               htmlFor="firstname"
-              className="text-white mb-2 font-semibold "
+              className="text-black mb-2 font-semibold "
             >
               First Name
             </label>
@@ -83,7 +83,7 @@ const navigate = useNavigate();
             />
             <label
               htmlFor="lastname"
-              className="text-white mb-2 font-semibold "
+              className="text-black mb-2 font-semibold "
             >
               Last Name
             </label>
@@ -94,7 +94,7 @@ const navigate = useNavigate();
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
-            <label htmlFor="phone" className="text-white mb-2 font-semibold ">
+            <label htmlFor="phone" className="text-black mb-2 font-semibold ">
               Phone
             </label>
             <input
@@ -104,7 +104,7 @@ const navigate = useNavigate();
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />
-            <label htmlFor="email" className="text-white mb-2 font-semibold ">
+            <label htmlFor="email" className="text-black mb-2 font-semibold ">
               Email Address
             </label>
             <input
@@ -116,7 +116,7 @@ const navigate = useNavigate();
             />
             <label
               htmlFor="password"
-              className="text-white mb-2 font-semibold "
+              className="text-black mb-2 font-semibold "
             >
               Password
             </label>
@@ -129,7 +129,7 @@ const navigate = useNavigate();
             />
             <label
               htmlFor="con-password"
-              className="text-white mb-2 font-semibold "
+              className="text-black mb-2 font-semibold "
             >
               Confirm password
             </label>
@@ -147,7 +147,7 @@ const navigate = useNavigate();
             >
               Login
             </button>
-            <p className="text-center w-full text-white">
+            <p className="text-center w-full text-black">
               I have an account? <span className="text-[#00E5FF]">Login</span>
             </p>
           </form>
