@@ -1,69 +1,62 @@
 import axios from "axios";
-import Navbar from "../components/Navbar";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ShowTime from "../components/ShowTime";
-
+import Navbar from "../components/Navbar"
 const MovieDetail = () => {
   const { id } = useParams();
-  const [movie, setMovie] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [movie, setMovie] = useState('');
+
+  const [isSize, setIsSize] = useState(window.innerWidth >= 1024);
   useEffect(() => {
-    const dataFetch = async () => {
+    const handleSize = () => {
+      setIsSize(window.innerWidth >= 1024);
+    };
+
+    window.addEventListener("resize", handleSize);
+    return () => window.removeEventListener("resize", handleSize);
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
       try {
         const res = await axios.get(`http://localhost:3000/movies/${id}`);
         setMovie(res.data);
-        setLoading(false);
         console.log(res.data);
       } catch (err) {
-        console.log("Movies Somthing...", err);
+        console.log("Something Wrong...");
       }
     };
-    dataFetch();
+    fetchData();
   }, [id]);
-  if (loading) {
-    return <div>loading...</div>;
-  }
-  if (!movie) {
-    return <div>Movie Not Found</div>;
-  }
-  return (
-    <>
-      <Navbar />
-      <div
-        className="w-full bg-cover bg-center h-[200px] md:h-[400px] relative overflow-hidden"
-        style={{ backgroundImage: `url(${movie.bg})` }}
-      >
-        <div className="absolute inset-0 h-full bg-black/80"></div>
-        <div className="flex  gap-5 mx-40">
-          <div className="w-60  mt-5 filter brightness-100 ">
-            <img src={movie.poster} alt={movie.title} />
-          </div>
-          <div>
-            <div className="mt-10">
-             <h1 className="text-3xl font-bold mb-2 text-white filter brightness-100">{movie.title}</h1>
-          </div>
-          <div className="flex gap-5 mb-3">
-            <div className="bg-black/70 p-1 text-center rounded-3xl w-20 text-white filter brightness-100 ">
-                <h3 className="mx-auto">{movie.quality}</h3>
-            </div>
-            <div className="bg-black/70 p-1 text-center rounded-3xl w-20 text-white filter brightness-100 ">
-                <h3 className="mx-auto">{movie.language }</h3>
-            </div>
-            <div className="bg-red-600 p-1 text-center rounded-3xl w-30 text-white filter brightness-100 cursor-pointer ">
-                <h3 className="mx-auto">play Trailer</h3>
-            </div>
-          </div>
-          <div className=" ">
-            <p className="text-white filter brightness-100">{movie.genre}</p>
-            <p className="text-white filter brightness-100">{movie.showDate}</p>
-          </div>
-          </div>
-        </div>
+
+  return <>
+  <Navbar/>
+  {isSize ?
+   <div className="relative w-full  bg-cover ">
+    <img src={movie.bg} alt={movie.title} className="w-full  bg-cover h-90"/>
+    <div className="absolute inset-0 bg-black/75 "></div>
+    <div className="absolute top-0 left-60 flex">
+      <div className="w-60">
+        <img src={movie.poster} alt="" />
       </div>
-      <ShowTime/>
-    </>
-  );
+      <div>
+        <h1 className="text-white text-[40px] ml-10 font-semibold mb-3">{movie.title}</h1>
+        <div>
+          <span className="bg-gray-800 text-white px-5 py-1 rounded-4xl ml-10 ">{movie.quality}</span>
+          <span className="bg-gray-800 text-white px-5 py-1 rounded-4xl ml-5 ">{movie.language}</span>
+          <span className="bg-red-500 text-white px-5 py-1 rounded-4xl ml-5 ">Play Trailer</span>
+        </div>
+        <p className="text-white ml-10 mt-5 ">{movie.genre}</p>
+        <p className="text-white ml-10  ">{movie.showDate}</p>
+      </div>
+    </div>
+   </div>
+    
+    :(
+<div>
+  
+</div>
+    )}</>;
 };
 
 export default MovieDetail;
