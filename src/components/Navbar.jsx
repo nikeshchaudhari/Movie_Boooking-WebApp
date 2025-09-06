@@ -5,7 +5,7 @@ import { logout } from "../feature/auth/authSlice";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { MdClose } from "react-icons/md";
 import axios from "axios";
-import Slider from "./Slider";
+import Slider from "./MovieSlider";
 
 const Navbar = () => {
 
@@ -27,7 +27,10 @@ const Navbar = () => {
               </h1>
             </NavLink>
           </div>
-          <div className=" flex justify-center w-[500px] ">
+        
+          {isLoggin ? (
+            <>
+              <div className=" flex justify-center w-[500px] ">
             <ul className="hidden md:flex gap-15  ">
               <li className="font-bold ">
                 <NavLink
@@ -61,10 +64,18 @@ const Navbar = () => {
                   Ticket Rate
                 </NavLink>
               </li>
+              <li className="font-bold ">
+                <NavLink
+                  to="/"
+                  className={({ isActive }) => {
+                    return isActive ? "text-yellow-500" : "text-black";
+                  }}
+                >
+                  My Tickets
+                </NavLink>
+              </li>
             </ul>
           </div>
-          {isLoggin ? (
-            <>
               <span className="text-black ">{user.email}</span>
               <button
                 onClick={() => dispatch(logout())}
@@ -75,16 +86,53 @@ const Navbar = () => {
             </>
           ) : (
             <>
+             <div className=" flex justify-center w-[500px] ">
+            <ul className="hidden md:flex gap-15  ">
+              <li className="font-bold ">
+                <NavLink
+                  to="/home"
+                  className={({ isActive }) => {
+                    return isActive || window.location.pathname === "/"
+                      ? "text-yellow-500"
+                      : "text-black";
+                  }}
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li className="font-bold ">
+                <NavLink
+                  to="/movies"
+                  className={({ isActive }) => {
+                    return isActive ? "text-yellow-500" : "text-black";
+                  }}
+                >
+                  Movie
+                </NavLink>
+              </li>
+              <li className="font-bold ">
+                <NavLink
+                  to="/ticket-rate"
+                  className={({ isActive }) => {
+                    return isActive ? "text-yellow-500" : "text-black";
+                  }}
+                >
+                  Ticket Rate
+                </NavLink>
+              </li>
+             
+            </ul>
+          </div>
               <div className="flex md:gap-5 gap-3 mx-5">
                 <NavLink
                   to="/login"
-                  className="hover:text-yellow-500  text-white"
+                  className="hover:text-yellow-500  text-black"
                 >
                   <h1 className="font-medium transition duration-200">Login</h1>
                 </NavLink>
                 <NavLink
                   to="/register"
-                  className="hover:text-yellow-500 text-white"
+                  className="hover:text-yellow-500 text-black "
                 >
                   <h1 className="font-medium transition duration-200">
                     Register
@@ -135,6 +183,14 @@ const Navbar = () => {
                 }}
               >
                 Ticket Rates
+              </NavLink>
+              <NavLink
+                to="/"
+                className={({ isActive }) => {
+                  return isActive ? "text-yellow-500" : "text-white";
+                }}
+              >
+                My Tickets
               </NavLink>
             </div>
           </div>
