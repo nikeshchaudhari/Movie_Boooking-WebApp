@@ -57,15 +57,15 @@ const Login = () => {
     <>
       <Navbar />
       <div className="mt-15">
-        <div className="w-[450px] h-[400px] mx-auto border border-white rounded-xl">
-          <h1 className="text-white text-[30px] text-center mt-3 font-bold">
+        <div className="w-[450px] h-[400px] mx-auto border border-black rounded-xl">
+          <h1 className="text-black text-[30px] text-center mt-3 font-bold">
             Login{" "}
           </h1>
           <form
             onSubmit={handleLogin}
             className=" flex flex-col p-6 items-start "
           >
-            <label htmlFor="email" className="text-white mb-2 font-semibold ">
+            <label htmlFor="email" className="text-black mb-2 font-semibold ">
               Email
             </label>
             <input
@@ -77,7 +77,7 @@ const Login = () => {
             />
             <label
               htmlFor="password"
-              className="text-white mb-2 font-semibold "
+              className="text-black mb-2 font-semibold "
             >
               Password
             </label>
@@ -95,11 +95,11 @@ const Login = () => {
             >
               Login
             </button>
-            <p className="text-center w-full text-white">
+            <p className="text-center w-full text-black">
               Don’t have an account?{" "}
               <span className="text-[#00E5FF]">Register</span>
             </p>
-            <p className="text-center w-full text-white">
+            <p className="text-center w-full text-black">
               Having trouble signing in?{" "}
               <span className="text-[#00E5FF]">Reset Password</span>
             </p>
