@@ -5,6 +5,44 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 
 const ShowTime = () => {
+ const[date,setDate]=useState([])
+
+ useEffect(()=>{
+ const today = new Date();
+ console.log(today);
+ const numDays = 3;
+ const dDate= [];
+
+
+    for (let i = 0; i < numDays; i++) {
+      const d = new Date();
+      d.setDate(today.getDate() + i);
+
+      let day = "";
+      if (i === 0) {
+        day = "Today";
+      } else if (i === 1) {
+        day = "Tomorrow";
+      } else {
+        day = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+      }
+      dDate.push({ day, value: d.toISOString().split("T")[0] });
+
+      console.log(day);
+    }
+    setDate(dDate);
+ 
+
+    const fetchData = async
+
+ },[])
+
+
+
+
+
+
+  
   return (
     <>
       <div className="">
@@ -81,10 +119,12 @@ const ShowTime = () => {
           >
             <div className="flex justify-between mt-5  w-[85vw] rounded-lg p-5 ">
               <h1 className="text-[30px] font-medium">Show Times</h1>
-              <div>
-                <NavLink>Today</NavLink>
+             {date.map((d)=>{
+               <div key={d.id}>
+                <NavLink> {d.day}</NavLink>
                 <NavLink>Tommarow</NavLink>
               </div>
+             })}
             </div>
             <div className="bg-gray-100  md:mx-5">
               <h1 className="bg-[#D9A250]  w-full md:w-[200px] md:p-2 text-white font-medium">MOVIES CINEMA</h1>
