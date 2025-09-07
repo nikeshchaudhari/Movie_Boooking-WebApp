@@ -37,8 +37,8 @@ const ShowTime = () => {
     }
    
     
-    
-  })
+    setDate(dDate);
+  },[])
 
   return (
     <>
@@ -118,6 +118,11 @@ const ShowTime = () => {
               <h1 className="text-[30px] font-medium">Show Times</h1>
               <div className="flex gap-4">
                {/* Date Button */}
+               {date.map((d)=>(
+                <div key={d.id}>
+                  {d.day}
+                </div>
+               ))}
               </div>
             </div>
             <div className="bg-gray-100  md:mx-5">
