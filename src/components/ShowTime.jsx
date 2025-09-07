@@ -33,7 +33,16 @@ const ShowTime = () => {
     setDate(dDate);
  
 
-    const fetchData = async
+    const fetchData = async()=>{
+      try{
+        await axios.get("http://localhost:3000/movies");
+        set
+
+      }
+      catch(err){
+
+      }
+    }
 
  },[])
 
