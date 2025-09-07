@@ -5,14 +5,13 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 
 const ShowTime = () => {
- const[date,setDate]=useState([])
+  const [date, setDate] = useState([]);
 
- useEffect(()=>{
- const today = new Date();
- console.log(today);
- const numDays = 3;
- const dDate= [];
-
+  useEffect(() => {
+    const today = new Date();
+    console.log(today);
+    const numDays = 3;
+    const dDate = [];
 
     for (let i = 0; i < numDays; i++) {
       const d = new Date();
@@ -31,27 +30,8 @@ const ShowTime = () => {
       console.log(day);
     }
     setDate(dDate);
- 
+  }, []);
 
-    const fetchData = async()=>{
-      try{
-        await axios.get("http://localhost:3000/movies");
-        set
-
-      }
-      catch(err){
-
-      }
-    }
-
- },[])
-
-
-
-
-
-
-  
   return (
     <>
       <div className="">
@@ -128,15 +108,19 @@ const ShowTime = () => {
           >
             <div className="flex justify-between mt-5  w-[85vw] rounded-lg p-5 ">
               <h1 className="text-[30px] font-medium">Show Times</h1>
-             {date.map((d)=>{
-               <div key={d.id}>
-                <NavLink> {d.day}</NavLink>
-                <NavLink>Tommarow</NavLink>
+              <div className="flex gap-4">
+                {" "}
+                {date.map((d) => (
+                  <div key={d.id}>
+                    <NavLink>{d.day}</NavLink>
+                  </div>
+                ))}
               </div>
-             })}
             </div>
             <div className="bg-gray-100  md:mx-5">
-              <h1 className="bg-[#D9A250]  w-full md:w-[200px] md:p-2 text-white font-medium">MOVIES CINEMA</h1>
+              <h1 className="bg-[#D9A250]  w-full md:w-[200px] md:p-2 text-white font-medium">
+                MOVIES CINEMA
+              </h1>
             </div>
           </div>
         </div>
