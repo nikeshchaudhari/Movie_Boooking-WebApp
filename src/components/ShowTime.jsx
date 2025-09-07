@@ -3,34 +3,42 @@ import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
-
+import { setMovies,setSelectDate } from "../feature/movie/movieSlice";
 const ShowTime = () => {
   const [date, setDate] = useState([]);
-
-  useEffect(() => {
+  useEffect(()=>{
     const today = new Date();
-    console.log(today);
+    // console.log(today);
     const numDays = 3;
-    const dDate = [];
+    const dDate =[];
 
-    for (let i = 0; i < numDays; i++) {
+    for(let i=0;i<numDays;i++){
       const d = new Date();
-      d.setDate(today.getDate() + i);
+      d.setDate(today.getDate()+i)
+      console.log(d);
 
-      let day = "";
-      if (i === 0) {
-        day = "Today";
-      } else if (i === 1) {
-        day = "Tomorrow";
-      } else {
-        day = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+      let day = ""
+      if(i==0){
+        day="Today";
+      }else if(i==1){
+        day="Tommorow"
+      }else{
+        day =d.toLocaleDateString("en-US",{day:"numeric",month:"short"})
       }
-      dDate.push({ day, value: d.toISOString().split("T")[0] });
+      dDate.push({day,value:d.toISOString().split("T")[0]})
+
 
       console.log(day);
+      console.log(dDate);
+      
+      
+      
+      
     }
-    setDate(dDate);
-  }, []);
+   
+    
+    
+  })
 
   return (
     <>
@@ -109,12 +117,7 @@ const ShowTime = () => {
             <div className="flex justify-between mt-5  w-[85vw] rounded-lg p-5 ">
               <h1 className="text-[30px] font-medium">Show Times</h1>
               <div className="flex gap-4">
-                {" "}
-                {date.map((d) => (
-                  <div key={d.id}>
-                    <NavLink>{d.day}</NavLink>
-                  </div>
-                ))}
+               {/* Date Button */}
               </div>
             </div>
             <div className="bg-gray-100  md:mx-5">
