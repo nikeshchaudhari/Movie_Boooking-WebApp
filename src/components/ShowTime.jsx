@@ -39,33 +39,31 @@ const ShowTime = () => {
   const showTime = {
     [date[0]?.value]: ["10:00 AM", "12:00 PM"],
     [date[1]?.value]: ["7:00 AM", "12:00 PM"],
-    [date[0]?.value]: ["3:00 PM", "12:00 AM"],
+    [date[2]?.value]: ["3:00 PM", "12:00 AM"],
   };
 
-  const timePast = (dateValue, t) => {
-    const now = new Date();
-    // console.log(now);
-    
-    const [time, period] = t.split(" ");
-    // console.log(time, period);
-    const[hours,minutes]= time.split(":").map(Number)
-    // console.log(hours,minutes);
+  // const timePast = (dateValue, t) => {
+  //   const now = new Date();
+  //   console.log(now);
 
-    if(period==="PM" && hours !==12){
-      hours +=12;
-    }
-    if(period==="AM" && hours ==12){
-      hours=0
-    }
-     console.log("👉 After convert:", hours, minutes);
+  //   const [time, period] = t.split(" ");
+  //   console.log(time, period);
+  //   let [hours, minutes] = time.split(":").map(Number);
+  //   console.log(hours,minutes);
 
-     const showDate = new Date (dateValue);
-     showDate.setHours(hours,minutes,0,0);
+  //   if (period === "PM" && hours !== 12) {
+  //     hours += 12;
+  //   }
+  //   if (period === "AM" && hours == 12) {
+  //     hours = 0;
+  //   }
+  //   console.log("👉 After convert:", hours, minutes);
 
-     return showDate < now;
-  };
+  //   const showDate = new Date(dateValue);
+  //   showDate.setHours(hours, minutes, 0, 0);
 
-
+  //   return showDate < now;
+  // };
 
   return (
     <>
@@ -147,17 +145,47 @@ const ShowTime = () => {
                 {/* Date Button */}
                 {date.map((d) => (
                   <div key={d.id}>
-                    <button className="bg-red-600">
+                    <button
+                      onClick={() => {
+                        setSelectDate(d.value);
+
+                        console.log(d.value);
+                      }}
+                      className={`hover:text-[#f49836] transition hover:duration-500 cursor-pointer`}
+                    >
                       {d.day}
                     </button>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="bg-gray-100  md:mx-5">
+            <div className="bg-gray-100  md:mx-5 flex gap-5 items-center">
               <h1 className="bg-[#D9A250]  w-full md:w-[200px] md:p-2 text-white font-medium">
                 MOVIES CINEMA
               </h1>
+              {/* Show times */}
+            <div>
+                {selectDate ?(
+                
+                showTime[selectDate]?.map((time,index)=>{
+                  const disabled = timePast(selectDate,time);
+                  console.log(disabled);
+                  
+
+                  return(
+                    <>
+                    <button key={index}  disabled ={disabled} className={`mx-3  ${
+                      disabled ? "bg-gray-400 rounded-2xl px-2 py-1 text-gray-700 cursor-not-allowed":"bg-[#00b5a1] text-white rounded-2xl px-2 py-1"} `}>
+                      {time}
+                    </button>
+                    </>
+                  )
+                })
+                
+              ):(
+                  <p className="text-gray-500">Please select a date to see showtimes</p>
+              )}
+            </div>
             </div>
           </div>
         </div>
