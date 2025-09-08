@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 const ShowTime = () => {
   const [date, setDate] = useState([]);
   const [selectDate, setSelectDate] = useState("");
+  const [showTimeData, setShowTimeData] = useState({});
   useEffect(() => {
     const today = new Date();
     // console.log(today);
@@ -36,34 +37,18 @@ const ShowTime = () => {
     // console.log(dDate[0].value);
   }, []);
 
-  const showTime = {
-    [date[0]?.value]: ["10:00 AM", "12:00 PM"],
-    [date[1]?.value]: ["7:00 AM", "12:00 PM"],
-    [date[2]?.value]: ["3:00 PM", "12:00 AM"],
-  };
-
-  // const timePast = (dateValue, t) => {
-  //   const now = new Date();
-  //   console.log(now);
-
-  //   const [time, period] = t.split(" ");
-  //   console.log(time, period);
-  //   let [hours, minutes] = time.split(":").map(Number);
-  //   console.log(hours,minutes);
-
-  //   if (period === "PM" && hours !== 12) {
-  //     hours += 12;
-  //   }
-  //   if (period === "AM" && hours == 12) {
-  //     hours = 0;
-  //   }
-  //   console.log("👉 After convert:", hours, minutes);
-
-  //   const showDate = new Date(dateValue);
-  //   showDate.setHours(hours, minutes, 0, 0);
-
-  //   return showDate < now;
-  // };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("http://localhost:3000/movies");
+        setShowTimeData(res.data);
+        console.log(res.data);
+      } catch (err) {
+        console.log("Not Found Date..");
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -164,28 +149,7 @@ const ShowTime = () => {
                 MOVIES CINEMA
               </h1>
               {/* Show times */}
-            <div>
-                {selectDate ?(
-                
-                showTime[selectDate]?.map((time,index)=>{
-                  const disabled = timePast(selectDate,time);
-                  console.log(disabled);
-                  
-
-                  return(
-                    <>
-                    <button key={index}  disabled ={disabled} className={`mx-3  ${
-                      disabled ? "bg-gray-400 rounded-2xl px-2 py-1 text-gray-700 cursor-not-allowed":"bg-[#00b5a1] text-white rounded-2xl px-2 py-1"} `}>
-                      {time}
-                    </button>
-                    </>
-                  )
-                })
-                
-              ):(
-                  <p className="text-gray-500">Please select a date to see showtimes</p>
-              )}
-            </div>
+              <div></div>
             </div>
           </div>
         </div>
