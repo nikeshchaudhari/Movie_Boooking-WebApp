@@ -3,9 +3,9 @@ import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
-import { setMovies,setSelectDate } from "../feature/movie/movieSlice";
 const ShowTime = () => {
   const [date, setDate] = useState([]);
+  const[selectDate,setSelectDate]=useState("");
   useEffect(()=>{
     const today = new Date();
     // console.log(today);
@@ -15,7 +15,7 @@ const ShowTime = () => {
     for(let i=0;i<numDays;i++){
       const d = new Date();
       d.setDate(today.getDate()+i)
-      console.log(d);
+      // console.log(d);
 
       let day = ""
       if(i==0){
@@ -28,8 +28,8 @@ const ShowTime = () => {
       dDate.push({day,value:d.toISOString().split("T")[0]})
 
 
-      console.log(day);
-      console.log(dDate);
+      // console.log(day);
+      // console.log(dDate);
       
       
       
@@ -38,6 +38,9 @@ const ShowTime = () => {
    
     
     setDate(dDate);
+    setSelectDate(dDate[0].value)
+    // console.log(dDate[0].value);
+    
   },[])
 
   return (
@@ -129,6 +132,7 @@ const ShowTime = () => {
               <h1 className="bg-[#D9A250]  w-full md:w-[200px] md:p-2 text-white font-medium">
                 MOVIES CINEMA
               </h1>
+
             </div>
           </div>
         </div>
