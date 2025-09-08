@@ -5,43 +5,67 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 const ShowTime = () => {
   const [date, setDate] = useState([]);
-  const[selectDate,setSelectDate]=useState("");
-  useEffect(()=>{
+  const [selectDate, setSelectDate] = useState("");
+  useEffect(() => {
     const today = new Date();
     // console.log(today);
     const numDays = 3;
-    const dDate =[];
+    const dDate = [];
 
-    for(let i=0;i<numDays;i++){
+    for (let i = 0; i < numDays; i++) {
       const d = new Date();
-      d.setDate(today.getDate()+i)
+      d.setDate(today.getDate() + i);
       // console.log(d);
 
-      let day = ""
-      if(i==0){
-        day="Today";
-      }else if(i==1){
-        day="Tommorow"
-      }else{
-        day =d.toLocaleDateString("en-US",{day:"numeric",month:"short"})
+      let day = "";
+      if (i == 0) {
+        day = "Today";
+      } else if (i == 1) {
+        day = "Tommorow";
+      } else {
+        day = d.toLocaleDateString("en-US", { day: "numeric", month: "short" });
       }
-      dDate.push({day,value:d.toISOString().split("T")[0]})
-
+      dDate.push({ day, value: d.toISOString().split("T")[0] });
 
       // console.log(day);
       // console.log(dDate);
-      
-      
-      
-      
     }
-   
-    
+
     setDate(dDate);
-    setSelectDate(dDate[0].value)
+    setSelectDate(dDate[0].value);
     // console.log(dDate[0].value);
+  }, []);
+
+  const showTime = {
+    [date[0]?.value]: ["10:00 AM", "12:00 PM"],
+    [date[1]?.value]: ["7:00 AM", "12:00 PM"],
+    [date[0]?.value]: ["3:00 PM", "12:00 AM"],
+  };
+
+  const timePast = (dateValue, t) => {
+    const now = new Date();
+    // console.log(now);
     
-  },[])
+    const [time, period] = t.split(" ");
+    // console.log(time, period);
+    const[hours,minutes]= time.split(":").map(Number)
+    // console.log(hours,minutes);
+
+    if(period==="PM" && hours !==12){
+      hours +=12;
+    }
+    if(period==="AM" && hours ==12){
+      hours=0
+    }
+     console.log("👉 After convert:", hours, minutes);
+
+     const showDate = new Date (dateValue);
+     showDate.setHours(hours,minutes,0,0);
+
+     return showDate < now;
+  };
+
+
 
   return (
     <>
@@ -120,19 +144,20 @@ const ShowTime = () => {
             <div className="flex justify-between mt-5  w-[85vw] rounded-lg p-5 ">
               <h1 className="text-[30px] font-medium">Show Times</h1>
               <div className="flex gap-4">
-               {/* Date Button */}
-               {date.map((d)=>(
-                <div key={d.id}>
-                  {d.day}
-                </div>
-               ))}
+                {/* Date Button */}
+                {date.map((d) => (
+                  <div key={d.id}>
+                    <button className="bg-red-600">
+                      {d.day}
+                    </button>
+                  </div>
+                ))}
               </div>
             </div>
             <div className="bg-gray-100  md:mx-5">
               <h1 className="bg-[#D9A250]  w-full md:w-[200px] md:p-2 text-white font-medium">
                 MOVIES CINEMA
               </h1>
-
             </div>
           </div>
         </div>
