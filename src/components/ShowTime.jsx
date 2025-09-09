@@ -50,6 +50,11 @@ const ShowTime = () => {
     fetchData();
   }, []);
 
+  const pastTime = (dateVal, timeVal) => {
+    const now = new Date();
+    console.log(now);
+  };
+
   return (
     <>
       <div className="">
@@ -134,7 +139,7 @@ const ShowTime = () => {
                       onClick={() => {
                         setSelectDate(d.value);
 
-                        console.log(d.value);
+                        // console.log(d.value);
                       }}
                       className={`hover:text-[#f49836] transition hover:duration-500 cursor-pointer`}
                     >
