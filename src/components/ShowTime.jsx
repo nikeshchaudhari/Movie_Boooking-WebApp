@@ -50,25 +50,17 @@ const ShowTime = () => {
     fetchData();
   }, []);
 
-  const pastTime = (dateVal, timeVal) => {
+  const isPast = (dateValue, timeStr) => {
     const now = new Date();
-    console.log(now);
+    const [t, period] = timeStr.trim().split(" ");
+    let [hours, minutes] = t.split(":").map(Number);
+    if (period && period.toUpperCase() === "PM" && hours !== 12) hours += 12;
+    if (period && period.toUpperCase() === "AM" && hours === 12) hours = 0;
+    const showDate = new Date(dateValue);
+    showDate.setHours(hours, minutes, 0, 0);
+    console.log("Is Past:", showDate < now);
 
-    const [t, period] = timeVal.split(" ");
-    let [hour, minutes] = t.split(" : ").map(Number);
-
-    // convert to 24format
-    if (period === "PM" && hour !== 12) {
-      hour = hour + 12;
-    }
-    if (period === "AM" && hour == 12) {
-      hour = 0;
-    }
-
-    const showDates = new Date(dateVal);
-    showDates.setHours(hour, minutes);
-
-    return showDates < now;
+    return showDate < now;
   };
 
   return (
@@ -155,7 +147,7 @@ const ShowTime = () => {
                       onClick={() => {
                         setSelectDate(d.value);
 
-                        // console.log(d.value);
+                        console.log(d.value);
                       }}
                       className={`hover:text-[#f49836] transition hover:duration-500 cursor-pointer`}
                     >
@@ -170,7 +162,25 @@ const ShowTime = () => {
                 MOVIES CINEMA
               </h1>
               {/* Show times */}
-              <div></div>
+
+               <div className="flex flex-wrap gap-3 mt-3">
+          {(showTimeData[selectDate] || []).map((time, idx) => {
+            const past = isPast(selectDate, time);
+            return (
+              <button
+                key={idx}
+                disabled={past}
+                className={`px-4 py-2 rounded ${
+                  past
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-green-500 text-white hover:bg-green-600"
+                }`}
+              >
+                {time}
+              </button>
+            );
+          })}
+        </div>
             </div>
           </div>
         </div>
