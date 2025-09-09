@@ -53,6 +53,22 @@ const ShowTime = () => {
   const pastTime = (dateVal, timeVal) => {
     const now = new Date();
     console.log(now);
+
+    const [t, period] = timeVal.split(" ");
+    let [hour, minutes] = t.split(" : ").map(Number);
+
+    // convert to 24format
+    if (period === "PM" && hour !== 12) {
+      hour = hour + 12;
+    }
+    if (period === "AM" && hour == 12) {
+      hour = 0;
+    }
+
+    const showDates = new Date(dateVal);
+    showDates.setHours(hour, minutes);
+
+    return showDates < now;
   };
 
   return (
