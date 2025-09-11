@@ -42,8 +42,8 @@ const ShowTime = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get("http://localhost:3000/movies");
-        setShowTimeData(res.data.showTimeData);
-        // console.log(res.data);
+        setShowTimeData(res.data.movies);
+        console.log(res.data.movies);
       } catch (err) {
         console.log("Not Found Date..");
       }
@@ -51,7 +51,15 @@ const ShowTime = () => {
     fetchData();
   }, []);
 
-  const isPast = (date,time) => {
+  const getTimeD = () => {
+   if (!Array.isArray(showTimeData)) return [];
+  return showTimeData
+    .filter(movie => movie.showDate === selectDate)
+    .flatMap(movie => movie.showTime || movie.showTimes || []);
+  };
+  console.log(getTimeD);
+
+  const isPast = (date, time) => {
     const now = new Date();
     console.log(now);
     const [t, period] = time.split(" ");
@@ -64,7 +72,7 @@ const ShowTime = () => {
       hour = 0;
     }
 
-    const showTime = new Date();
+    const showTime = new Date(date);
     showTime.setHours(hour, minutes, 0, 0);
     return showTime < now;
   };
@@ -168,9 +176,26 @@ const ShowTime = () => {
                 MOVIES CINEMA
               </h1>
               {/* Show times */}
-              {(showTimeData[selectDate] || []).map((time,index)=>{
-                const past = isPast(selectDate,time)
-              })}
+              {getTimeD().length > 0 ? (
+                getTimeD().map((time, idx) => {
+                  const past = isPast(selectDate, time);
+                  return (
+                    <button
+                      key={idx}
+                      disabled={past}
+                      className={`px-4 py-2 rounded ${
+                        past
+                          ? "bg-gray-400 cursor-not-allowed"
+                          : "bg-green-500 text-white hover:bg-green-600"
+                      }`}
+                    >
+                      {time}
+                    </button>
+                  );
+                })
+              ) : (
+                <p>No Show Time Available</p>
+              )}
             </div>
           </div>
         </div>
