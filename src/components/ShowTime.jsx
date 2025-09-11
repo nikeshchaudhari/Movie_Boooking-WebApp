@@ -6,7 +6,8 @@ import { NavLink } from "react-router-dom";
 const ShowTime = () => {
   const [date, setDate] = useState([]);
   const [selectDate, setSelectDate] = useState("");
-  const [showTimeData, setShowTimeData] = useState({});
+  const [showTimeData, setShowTimeData] = useState([]);
+  
   useEffect(() => {
     const today = new Date();
     // console.log(today);
@@ -41,7 +42,7 @@ const ShowTime = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get("http://localhost:3000/movies");
-        setShowTimeData(res.data);
+        setShowTimeData(res.data.showTimeData);
         // console.log(res.data);
       } catch (err) {
         console.log("Not Found Date..");
