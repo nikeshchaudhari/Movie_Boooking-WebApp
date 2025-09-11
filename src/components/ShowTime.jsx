@@ -7,7 +7,7 @@ const ShowTime = () => {
   const [date, setDate] = useState([]);
   const [selectDate, setSelectDate] = useState("");
   const [showTimeData, setShowTimeData] = useState([]);
-  
+
   useEffect(() => {
     const today = new Date();
     // console.log(today);
@@ -51,7 +51,7 @@ const ShowTime = () => {
     fetchData();
   }, []);
 
-  const isPast = (time) => {
+  const isPast = (date,time) => {
     const now = new Date();
     console.log(now);
     const [t, period] = time.split(" ");
@@ -64,7 +64,7 @@ const ShowTime = () => {
       hour = 0;
     }
 
-    const showTime = newDate();
+    const showTime = new Date();
     showTime.setHours(hour, minutes, 0, 0);
     return showTime < now;
   };
@@ -168,25 +168,9 @@ const ShowTime = () => {
                 MOVIES CINEMA
               </h1>
               {/* Show times */}
-
-              <div className="flex flex-wrap gap-3 mt-3">
-                {(showTimeData[selectDate] || []).map((time, idx) => {
-                  const past = isPast(selectDate, time);
-                  return (
-                    <button
-                      key={idx}
-                      disabled={past}
-                      className={`px-4 py-2 rounded ${
-                        past
-                          ? "bg-gray-400 cursor-not-allowed"
-                          : "bg-green-500 text-white hover:bg-green-600"
-                      }`}
-                    >
-                      {time}
-                    </button>
-                  );
-                })}
-              </div>
+              {(showTimeData[selectDate] || []).map((time,index)=>{
+                const past = isPast(selectDate,time)
+              })}
             </div>
           </div>
         </div>
