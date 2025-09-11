@@ -42,7 +42,7 @@ const ShowTime = () => {
       try {
         const res = await axios.get("http://localhost:3000/movies");
         setShowTimeData(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       } catch (err) {
         console.log("Not Found Date..");
       }
@@ -50,17 +50,22 @@ const ShowTime = () => {
     fetchData();
   }, []);
 
-  const isPast = (dateValue, timeStr) => {
+  const isPast = (time) => {
     const now = new Date();
-    const [t, period] = timeStr.trim().split(" ");
-    let [hours, minutes] = t.split(":").map(Number);
-    if (period && period.toUpperCase() === "PM" && hours !== 12) hours += 12;
-    if (period && period.toUpperCase() === "AM" && hours === 12) hours = 0;
-    const showDate = new Date(dateValue);
-    showDate.setHours(hours, minutes, 0, 0);
-    console.log("Is Past:", showDate < now);
+    console.log(now);
+    const [t, period] = time.split(" ");
+    let [hour, minutes] = t.split(":").map(Number);
 
-    return showDate < now;
+    if (period === "PM" && hour !== 12) {
+      hour = hour + 12;
+    }
+    if (period === "AM" && hour === 12) {
+      hour = 0;
+    }
+
+    const showTime = newDate();
+    showTime.setHours(hour, minutes, 0, 0);
+    return showTime < now;
   };
 
   return (
@@ -163,24 +168,24 @@ const ShowTime = () => {
               </h1>
               {/* Show times */}
 
-               <div className="flex flex-wrap gap-3 mt-3">
-          {(showTimeData[selectDate] || []).map((time, idx) => {
-            const past = isPast(selectDate, time);
-            return (
-              <button
-                key={idx}
-                disabled={past}
-                className={`px-4 py-2 rounded ${
-                  past
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-green-500 text-white hover:bg-green-600"
-                }`}
-              >
-                {time}
-              </button>
-            );
-          })}
-        </div>
+              <div className="flex flex-wrap gap-3 mt-3">
+                {(showTimeData[selectDate] || []).map((time, idx) => {
+                  const past = isPast(selectDate, time);
+                  return (
+                    <button
+                      key={idx}
+                      disabled={past}
+                      className={`px-4 py-2 rounded ${
+                        past
+                          ? "bg-gray-400 cursor-not-allowed"
+                          : "bg-green-500 text-white hover:bg-green-600"
+                      }`}
+                    >
+                      {time}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
