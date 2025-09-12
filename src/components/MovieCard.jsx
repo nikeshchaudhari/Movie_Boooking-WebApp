@@ -74,7 +74,7 @@ console.log("Current showtrailer",showTrailer);
 
       {showTrailer && (
         <div className="fixed inset-0 bg-black/90 z-10 flex justify-center items-center">
-          <div className="relative w-[70%] h-[500px]">
+          <div className="relative w-full lg:w-[70%] h-[300px] md:h-[500px] p-3 ">
             <ReactPlayer
               src ={showTrailer}
               playing={false}
@@ -83,7 +83,7 @@ console.log("Current showtrailer",showTrailer);
               height="500px"
             />
             <button
-              className="absolute text-white text-[50px] -top-10 -right-10 cursor-pointer "
+              className="absolute text-white text-[50px] top-0 right-0 md:-top-10 md:-right-10 cursor-pointer "
               onClick={() => setShowTrailer(null)}
             >
               &times;
