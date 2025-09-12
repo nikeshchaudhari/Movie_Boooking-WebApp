@@ -46,7 +46,7 @@ const MovieCard = ({ movies }) => {
               <h2 className="mt-2 font-semibold text-lg text-center ">
                 {movies.title}
               </h2>
-            </div>
+            </div>  
             
           </>
         ) : (
