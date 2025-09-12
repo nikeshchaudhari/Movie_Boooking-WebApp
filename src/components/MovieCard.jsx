@@ -5,7 +5,7 @@ import ReactPlayer from "react-player"
 const MovieCard = ({ movies }) => {
   const cardRef = useRef();
   const [visible, setVisible] = useState(false);
-  const [showTrailer, setShowTrailer]= useState(false);
+  const [showTrailer, setShowTrailer]= useState(null);
   useEffect(() => {
     const start = new IntersectionObserver(
       ([entery]) => {
@@ -37,7 +37,7 @@ const MovieCard = ({ movies }) => {
                   {movies.grade}
                 </span>
                 <div className="absolute inset-0 text-white flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 cursor-pointer">
-                 <AiOutlinePlayCircle className="text-[60px] mb-2 transform transition-transform duration-300 hover:scale-125 " onClick={()=>setShowTrailer(true)}/>
+                 <AiOutlinePlayCircle className="text-[60px] mb-2 transform transition-transform duration-300 hover:scale-125 " onClick={()=>setShowTrailer(movies.trailer)}/>
               <Link to={`/moviedetails/${movies.id}`}>
               <span className="font-semibold text-[20px] hover:text-red-300">BUY NOW</span>
               </Link>
@@ -58,12 +58,12 @@ const MovieCard = ({ movies }) => {
 
       {/* Show Trailer */}
 
-      {showTrailer && (
+      {showTrailer  && (
         <div className="fixed inset-0 bg-black/90 z-10 flex justify-center items-center">
           <div className="relative w-[70%] h-[500px]">
-            <ReactPlayer src="https://www.youtube.com/watch?v=x2QZl1dqWbY&t=30s&pp=ygUTbWFuZ25lIHJhamEgdHJhaWxlcg%3D%3D" playing controls  width="100%"
+            <ReactPlayer url={showTrailer} playing controls  width="100%"
               height="500px"/>
-            <button className="absolute text-white text-[50px] -top-10 -right-10 cursor-pointer " onClick={()=>setShowTrailer(false)}>
+            <button className="absolute text-white text-[50px] -top-10 -right-10 cursor-pointer " onClick={()=>setShowTrailer(null) }>
               &times;
             </button>
           </div>
