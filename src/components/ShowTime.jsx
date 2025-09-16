@@ -42,41 +42,21 @@ const ShowTime = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get("http://localhost:3000/movies");
-        setShowTimeData(res.data.movies);
-        console.log(res.data.movies);
+        setShowTimeData(res.data);
+        console.log(res.data);
       } catch (err) {
-        console.log("Not Found Date..");
+        console.log(err);
       }
     };
     fetchData();
   }, []);
-
-  const getTimeD = () => {
-   if (!Array.isArray(showTimeData)) return [];
-  return showTimeData
-    .filter(movie => movie.showDate === selectDate)
-    .flatMap(movie => movie.showTime || movie.showTimes || []);
-  };
-  console.log(getTimeD);
-
-  const isPast = (date, time) => {
-    const now = new Date();
-    console.log(now);
-    const [t, period] = time.split(" ");
-    let [hour, minutes] = t.split(":").map(Number);
-
-    if (period === "PM" && hour !== 12) {
-      hour = hour + 12;
-    }
-    if (period === "AM" && hour === 12) {
-      hour = 0;
-    }
-
-    const showTime = new Date(date);
-    showTime.setHours(hour, minutes, 0, 0);
-    return showTime < now;
-  };
-
+  const uniqueTimes = [
+    ...new Set(
+      showTimeData
+        .filter((movie) => movie.showDate === selectDate)
+        .flatMap((movie) => movie.showTime || [])
+    ),
+  ];
   return (
     <>
       <div className="">
@@ -176,26 +156,30 @@ const ShowTime = () => {
                 MOVIES CINEMA
               </h1>
               {/* Show times */}
-              {getTimeD().length > 0 ? (
-                getTimeD().map((time, idx) => {
-                  const past = isPast(selectDate, time);
-                  return (
+              {showTimeData
+          .filter(movie => movie.showDate === selectDate)
+          .map(movie => {
+            const times = movie.showTime || movie.showTimes || []; // handle both keys
+            return (
+              <div key={movie.id} className="flex flex-wrap gap-3">
+                {times.length > 0 ? (
+                  times.map((time, idx) => (
                     <button
                       key={idx}
-                      disabled={past}
-                      className={`px-4 py-2 rounded ${
-                        past
-                          ? "bg-gray-400 cursor-not-allowed"
-                          : "bg-green-500 text-white hover:bg-green-600"
-                      }`}
+                      className="bg-[#00b5a1] text-white px-3 py-1 rounded hover:bg-[#f49836] transition"
                     >
                       {time}
                     </button>
-                  );
-                })
-              ) : (
-                <p>No Show Time Available</p>
-              )}
+                  ))
+                ) : (
+                  <span className="text-gray-500">No show times</span>
+                )}
+              </div>
+            );
+          })}
+        {showTimeData.filter(movie => movie.showDate === selectDate).length === 0 && (
+          <span className="text-gray-500 text-center">No movies available for this date</span>
+        )}
             </div>
           </div>
         </div>
