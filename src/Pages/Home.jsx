@@ -1,7 +1,8 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-import OnShowing from '../components/Onshowing'
 import MovieSlider from '../components/MovieSlider'
+import Onshowing from '../components/OnShowing'
+import MovieTrailer from '../components/MovieTrailer'
 
 const Home = () => {
   return (
@@ -9,9 +10,8 @@ const Home = () => {
     
       <Navbar/>
       <MovieSlider/>
-  
-       <OnShowing/> 
-  
+  <Onshowing/>
+  {/* <MovieTrailer/>   */}
     
     </>
   )
