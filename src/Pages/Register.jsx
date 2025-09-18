@@ -39,7 +39,7 @@ const navigate = useNavigate();
     };
 
     try {
-      const res = await axios.post("http://localhost:3000/users", data);
+      const res = await axios.post("http://localhost:4080/users/add-user", data);
        console.log("User registered", res.data);
 
       setFirstName("");
