@@ -1,12 +1,33 @@
 import React, { useEffect, useState } from "react";
 
 const ShowTime = () => {
-  
-const[selectDate,setSelectDate]= useState(null)
-useEffect(()=>{
+  const [date, setDate] = useState(null);
+  const [selectDate, setSelectDate] = useState("");
+  useEffect(() => {
+    const today = new Date();
+    // console.log(today);
+    const numDays = 3;
+    const dDate = [];
 
-},[])
-  
+    for (let i = 0; i < numDays; i++) {
+      const d = new Date();
+      // console.log(d);
+      d.setDate(today.getDate() + i);
+
+      let day = "";
+      if (i === 0) {
+        day = "Today";
+      } else if (i === 1) {
+        day = "Tomorrow";
+      } else {
+        day = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+      }
+      // console.log(day);
+      dDate.push({ day, value: d.toISOString().split("T")[0] });
+    }
+    console.log(dDate[0]);
+  }, []);
+
   return (
     <>
       <div>
