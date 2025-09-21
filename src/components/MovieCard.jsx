@@ -2,10 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectMovie } from "../feature/movie/movieSlice";
+
 const MovieCard = ({ movies }) => {
+  const dispatch =useDispatch()
   const cardRef = useRef();
   const [visible, setVisible] = useState(false);
   const [showTrailer, setShowTrailer] = useState(null);
+  const movie = useSelector((state)=>state.movies.selectMovie)
   useEffect(() => {
     const start = new IntersectionObserver(
       ([entery]) => {
@@ -51,7 +56,7 @@ console.log("Current showtrailer",showTrailer);
                       console.log(movies.trailer);
                     }}
                   />
-                  <Link to={`/moviedetails/${movies.id}`}>
+                  <Link to={`/moviedetails/${movies.id}`} onClick={()=>dispatch(setSelectMovie(movies))}>
                     <span className="font-semibold text-[20px] hover:text-red-300">
                       BUY NOW
                     </span>
