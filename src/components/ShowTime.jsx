@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectDate } from "../feature/movie/movieSlice";
 const ShowTime = () => {
-  const [date, setDate] = useState(null);
-  const [selectDate, setSelectDate] = useState("");
+  const dispatch = useDispatch()
+  const dateSelect = useSelector((state)=>state.movies)
+  const [date, setDate] = useState([]);
+  // const [selectDate, setSelectDate] = useState("");
   useEffect(() => {
     const today = new Date();
     // console.log(today);
@@ -25,8 +28,13 @@ const ShowTime = () => {
       // console.log(day);
       dDate.push({ day, value: d.toISOString().split("T")[0] });
     }
-    console.log(dDate[0]);
-  }, []);
+    // console.log(dDate[0]);
+    setDate(dDate)
+
+   if(dDate.length>0){
+    dispatch(setSelectDate(dDate[0].value))
+   }
+  }, [dispatch]);
 
   return (
     <>
@@ -103,7 +111,13 @@ const ShowTime = () => {
       <div className=" w-full h-50 mt-5">
         <div className=" shadow-2xl w-[90vw] h-50 mx-auto flex justify-between p-5">
           <h1 className="text-[30px] mx-5 font-bold  ">Show Times</h1>
-          <div className="text-[20px]">Today</div>
+          <div className="flex gap-3">
+            {date.map((d)=>(
+            <div key={d.day}>
+              <button className="hover:text-red-600 cursor-pointer hover:duration-300">{d.day}</button>
+            </div>
+          ))}
+          </div>
         </div>
       </div>
     </>
