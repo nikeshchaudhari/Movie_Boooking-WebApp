@@ -1,66 +1,11 @@
-import React, { useEffect, useState } from "react";
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
-import { NavLink } from "react-router-dom";
+import React from 'react'
+
 const ShowTime = () => {
-  const [date, setDate] = useState([]);
-  const [selectDate, setSelectDate] = useState("");
-  const [showTimeData, setShowTimeData] = useState([]);
-
-  useEffect(() => {
-    const today = new Date();
-    // console.log(today);
-    const numDays = 3;
-    const dDate = [];
-
-    for (let i = 0; i < numDays; i++) {
-      const d = new Date();
-      d.setDate(today.getDate() + i);
-      // console.log(d);
-
-      let day = "";
-      if (i == 0) {
-        day = "Today";
-      } else if (i == 1) {
-        day = "Tommorow";
-      } else {
-        day = d.toLocaleDateString("en-US", { day: "numeric", month: "short" });
-      }
-      dDate.push({ day, value: d.toISOString().split("T")[0] });
-
-      // console.log(day);
-      // console.log(dDate);
-    }
-
-    setDate(dDate);
-    setSelectDate(dDate[0].value);
-    // console.log(dDate[0].value);
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get("http://localhost:3000/movies");
-        setShowTimeData(res.data);
-        console.log(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
-  }, []);
-  const uniqueTimes = [
-    ...new Set(
-      showTimeData
-        .filter((movie) => movie.showDate === selectDate)
-        .flatMap((movie) => movie.showTime || [])
-    ),
-  ];
   return (
-    <>
-      <div className="">
-        <section className="bg-[##fff]/50  ">
+  <>
+  
+    <div>
+      <section className="bg-[##fff]/50  ">
           <div>
             <div className="flex justify-center items-center flex-wrap mt-10">
               <span>
@@ -126,66 +71,14 @@ const ShowTime = () => {
             </div>
           </div>
         </section>
-        <div className=" flex justify-center p-2 md:p-0">
-          <div
-            className="w-full md:w-[85vw] mt-8"
-            style={{ boxShadow: " 2px 2px 25px 2px #CFCFCF" }}
-          >
-            <div className="flex justify-between mt-5  w-[85vw] rounded-lg p-5 ">
-              <h1 className="text-[30px] font-medium">Show Times</h1>
-              <div className="flex gap-4">
-                {/* Date Button */}
-                {date.map((d) => (
-                  <div key={d.id}>
-                    <button
-                      onClick={() => {
-                        setSelectDate(d.value);
+    </div>
+    {/* Show time */}
 
-                        console.log(d.value);
-                      }}
-                      className={`hover:text-[#f49836] transition hover:duration-500 cursor-pointer`}
-                    >
-                      {d.day}
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="bg-gray-100  md:mx-5 flex gap-5 items-center">
-              <h1 className="bg-[#D9A250]  w-full md:w-[200px] md:p-2 text-white font-medium">
-                MOVIES CINEMA
-              </h1>
-              {/* Show times */}
-              {showTimeData
-          .filter(movie => movie.showDate === selectDate)
-          .map(movie => {
-            const times = movie.showTime || movie.showTimes || []; // handle both keys
-            return (
-              <div key={movie.id} className="flex flex-wrap gap-3">
-                {times.length > 0 ? (
-                  times.map((time, idx) => (
-                    <button
-                      key={idx}
-                      className="bg-[#00b5a1] text-white px-3 py-1 rounded hover:bg-[#f49836] transition"
-                    >
-                      {time}
-                    </button>
-                  ))
-                ) : (
-                  <span className="text-gray-500">No show times</span>
-                )}
-              </div>
-            );
-          })}
-        {showTimeData.filter(movie => movie.showDate === selectDate).length === 0 && (
-          <span className="text-gray-500 text-center">No movies available for this date</span>
-        )}
-            </div>
-          </div>
-        </div>
-      </div>
+    <div>
+      
+    </div>
     </>
-  );
-};
+  )
+}
 
-export default ShowTime;
+export default ShowTime
