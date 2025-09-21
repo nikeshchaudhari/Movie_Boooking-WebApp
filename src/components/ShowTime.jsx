@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 
 const ShowTime = () => {
-  return (
-  <>
   
-    <div>
-      <section className="bg-[##fff]/50  ">
+const[selectDate,setSelectDate]= useState(null)
+useEffect(()=>{
+
+},[])
+  
+  return (
+    <>
+      <div>
+        <section className="bg-[##fff]/50  ">
           <div>
             <div className="flex justify-center items-center flex-wrap mt-10">
               <span>
@@ -71,14 +76,17 @@ const ShowTime = () => {
             </div>
           </div>
         </section>
-    </div>
-    {/* Show time */}
+      </div>
+      {/* Show time */}
 
-    <div>
-      
-    </div>
+      <div className=" w-full h-50 mt-5">
+        <div className=" shadow-2xl w-[90vw] h-50 mx-auto flex justify-between p-5">
+          <h1 className="text-[30px] mx-5 font-bold  ">Show Times</h1>
+          <div className="text-[20px]">Today</div>
+        </div>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default ShowTime
+export default ShowTime;
