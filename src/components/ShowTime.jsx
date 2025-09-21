@@ -114,13 +114,19 @@ const ShowTime = () => {
           <div className="flex gap-3">
             {date.map((d)=>(
             <div key={d.day}>
-              <button className="hover:text-red-600 cursor-pointer hover:duration-300" onClick={()=>console.log(d.day)
+              <button className="hover:text-red-600 cursor-pointer hover:duration-300" onClick={()=>dispatch(setSelectDate(d.value))
               }>{d.day}</button>
             </div>
           ))}
           </div>
         </div>
       </div>
+
+      {/* Show Time */}
+      <div>
+       
+      </div>
+      
     </>
   );
 };
