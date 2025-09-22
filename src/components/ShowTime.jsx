@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectDate } from "../feature/movie/movieSlice";
+import { setMovies, setSelectDate } from "../feature/movie/movieSlice";
 import { useNavigate } from "react-router-dom";
 const ShowTime = () => {
   const dispatch = useDispatch();
@@ -39,8 +39,8 @@ const ShowTime = () => {
     }
   }, [dispatch]);
 
-  const handleShow = (e) => {
-    e.preventDefault();
+  const handleShow = (time) => {
+    dispatch(setMovies({...movie,selectTime:time}))
     navigate("/seatbooking");
   };
   return (
@@ -140,7 +140,7 @@ const ShowTime = () => {
               <div
                 key={index}
                 className="bg-[#00b5a1] hover:bg-[#0b7064] hover:duration-500 cursor-pointer text-white text-center  md:px-5  md:py-2 rounded"
-                onClick={()=>navigate(`/seatbooking`)}
+                onClick={()=>handleShow(time)}
               >
                 {time}
               </div>
