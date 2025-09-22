@@ -111,8 +111,8 @@ const ShowTime = () => {
 
       <div className="shadow-2xl w-[90vw] mx-auto  h-full mt-5">
         <div className="   flex justify-between p-5">
-          <h1 className="text-[30px] mx-5 font-bold  ">Show Times</h1>
-          <div className="flex gap-3">
+          <h1 className="md:text-[30px] md:mx-5 font-bold  ">Show Times</h1>
+          <div className="flex gap-3 ">
             {date.map((d) => (
               <div key={d.day}>
                 <button
@@ -124,25 +124,25 @@ const ShowTime = () => {
               </div>
             ))}
           </div>
-          
         </div>
-        
-        {/* Show Time */}
-      
-    <div className="flex justify-center gap-3">
-       {movie && movie.showDate === selectDate ? (
-          movie.showTime.map((time, index) => (
-           <div >
-            {time}
-           </div>
-          ))
-        ) : (
-          <p className="text-gray-500">No showtimes available</p>
-        )}
-    </div>
-      </div>
-    
 
+        {/* Show Time */}
+
+        <div className="flex justify-center gap-3 md:p-5">
+          {movie && movie.showDate === selectDate ? (
+            movie.showTime.map((time, index) => (
+              <div
+                key={index}
+                className="bg-[#00b5a1] hover:bg-[#0b7064] hover:duration-500 cursor-pointer text-white text-center  md:px-5  md:py-2 rounded"
+              >
+                {time}
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-500">No showtimes available</p>
+          )}
+        </div>
+      </div>
     </>
   );
 };
