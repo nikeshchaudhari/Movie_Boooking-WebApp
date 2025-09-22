@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectDate } from "../feature/movie/movieSlice";
 const ShowTime = () => {
-  const dispatch = useDispatch()
-  const dateSelect = useSelector((state)=>state.movies)
+  const dispatch = useDispatch();
+  // const dateSelect = useSelector((state) => state.movies);
   const [date, setDate] = useState([]);
-  // const [selectDate, setSelectDate] = useState("");
+  const selectDate = useSelector((state) => state.movies.selectDate);
+  const movie = useSelector((state) => state.movies.selectMovie);
   useEffect(() => {
     const today = new Date();
     // console.log(today);
@@ -29,11 +30,11 @@ const ShowTime = () => {
       dDate.push({ day, value: d.toISOString().split("T")[0] });
     }
     // console.log(dDate[0]);
-    setDate(dDate)
+    setDate(dDate);
 
-   if(dDate.length>0){
-    dispatch(setSelectDate(dDate[0].value))
-   }
+    if (dDate.length > 0) {
+      dispatch(setSelectDate(dDate[0].value));
+    }
   }, [dispatch]);
 
   return (
@@ -108,25 +109,40 @@ const ShowTime = () => {
       </div>
       {/* Show time */}
 
-      <div className=" w-full h-50 mt-5">
-        <div className=" shadow-2xl w-[90vw] h-50 mx-auto flex justify-between p-5">
+      <div className="shadow-2xl w-[90vw] mx-auto  h-full mt-5">
+        <div className="   flex justify-between p-5">
           <h1 className="text-[30px] mx-5 font-bold  ">Show Times</h1>
           <div className="flex gap-3">
-            {date.map((d)=>(
-            <div key={d.day}>
-              <button className="hover:text-red-600 cursor-pointer hover:duration-300" onClick={()=>dispatch(setSelectDate(d.value))
-              }>{d.day}</button>
-            </div>
-          ))}
+            {date.map((d) => (
+              <div key={d.day}>
+                <button
+                  className="hover:text-red-600 cursor-pointer hover:duration-300"
+                  onClick={() => dispatch(setSelectDate(d.value))}
+                >
+                  {d.day}
+                </button>
+              </div>
+            ))}
           </div>
+          
         </div>
-      </div>
-
-      {/* Show Time */}
-      <div>
-       
-      </div>
+        
+        {/* Show Time */}
       
+    <div className="flex justify-center gap-3">
+       {movie && movie.showDate === selectDate ? (
+          movie.showTime.map((time, index) => (
+           <div >
+            {time}
+           </div>
+          ))
+        ) : (
+          <p className="text-gray-500">No showtimes available</p>
+        )}
+    </div>
+      </div>
+    
+
     </>
   );
 };
