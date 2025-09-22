@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setMovies, setSelectDate } from "../feature/movie/movieSlice";
+import { setMovies, setSelectDate,setSelectedTime} from "../feature/movie/movieSlice";
 import { useNavigate } from "react-router-dom";
 const ShowTime = () => {
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ const ShowTime = () => {
   }, [dispatch]);
 
   const handleShow = (time) => {
-    dispatch(setMovies({...movie,selectTime:time}))
+    dispatch(setSelectedTime(time))
     navigate("/seatbooking");
   };
   return (
