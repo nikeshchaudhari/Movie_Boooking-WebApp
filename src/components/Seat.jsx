@@ -3,7 +3,7 @@ import React from 'react'
 const Seat = () => {
   return (
     <>
-    <div>
+    <div className='     md:mx-20'>
           <section className="bg-[##fff]/50  ">
           <div>
             <div className="flex justify-center items-center flex-wrap mt-10">
@@ -70,6 +70,10 @@ const Seat = () => {
             </div>
           </div>
         </section>
+        <div>
+            
+        </div>
+
     </div>
     </>
   )
