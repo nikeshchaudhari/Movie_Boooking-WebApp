@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectDate } from "../feature/movie/movieSlice";
+import { useNavigate } from "react-router-dom";
 const ShowTime = () => {
   const dispatch = useDispatch();
   // const dateSelect = useSelector((state) => state.movies);
   const [date, setDate] = useState([]);
   const selectDate = useSelector((state) => state.movies.selectDate);
   const movie = useSelector((state) => state.movies.selectMovie);
+  const navigate = useNavigate();
   useEffect(() => {
     const today = new Date();
     // console.log(today);
@@ -37,6 +39,10 @@ const ShowTime = () => {
     }
   }, [dispatch]);
 
+  const handleShow = (e) => {
+    e.preventDefault();
+    navigate("/seatbooking");
+  };
   return (
     <>
       <div>
@@ -134,6 +140,7 @@ const ShowTime = () => {
               <div
                 key={index}
                 className="bg-[#00b5a1] hover:bg-[#0b7064] hover:duration-500 cursor-pointer text-white text-center  md:px-5  md:py-2 rounded"
+                onClick={()=>navigate(`/seatbooking`)}
               >
                 {time}
               </div>
