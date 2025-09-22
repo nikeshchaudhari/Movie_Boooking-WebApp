@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import { useSelector } from "react-redux";
+import Seat from "../components/Seat";
 
 const SeatBook = () => {
   const movie = useSelector((state) => state.movies.selectMovie);
@@ -21,6 +22,7 @@ const SeatBook = () => {
             <p>No movie selected</p>
           )}
         </div>
+        <Seat/>
       </div>
     </>
   );
